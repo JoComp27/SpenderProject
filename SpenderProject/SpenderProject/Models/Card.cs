@@ -34,6 +34,19 @@ namespace SpenderProject.Models
             this.BlackCost = BlackCost;
         }
 
+        public Card(int[] attributes)
+        {
+            this.Color = (Colors)attributes[0];
+            this.Points = attributes[1];
+
+            this.BlackCost = attributes[2];
+            this.WhiteCost = attributes[3];
+            this.RedCost = attributes[4];
+            this.BlueCost = attributes[5];
+            this.GreenCost = attributes[6];
+        }
+
+
 
     }
 }
