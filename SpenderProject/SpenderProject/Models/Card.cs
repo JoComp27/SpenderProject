@@ -12,6 +12,8 @@ namespace SpenderProject.Models
 
         public int Points { get; }
 
+        public int Level { get; }
+
         public int WhiteCost { get; }
 
         public int BlueCost { get; }
@@ -22,11 +24,12 @@ namespace SpenderProject.Models
 
         public int BlackCost { get; }
 
-        public Card(Colors Color, int Points, int WhiteCost, int BlueCost, int GreenCost, int RedCost, int BlackCost)
+        public Card(Colors Color, int Level, int Points, int WhiteCost, int BlueCost, int GreenCost, int RedCost, int BlackCost)
         {
             this.Color = Color;
+            this.Level = Level;
             this.Points = Points;
-
+            
             this.WhiteCost = WhiteCost;
             this.BlueCost = BlueCost;
             this.GreenCost = GreenCost;
@@ -34,16 +37,17 @@ namespace SpenderProject.Models
             this.BlackCost = BlackCost;
         }
 
-        public Card(int[] attributes)
+        public Card(List<int> attributes)
         {
             this.Color = (Colors)attributes[0];
-            this.Points = attributes[1];
+            this.Level = attributes[1];
+            this.Points = attributes[2];
 
-            this.BlackCost = attributes[2];
-            this.WhiteCost = attributes[3];
-            this.RedCost = attributes[4];
-            this.BlueCost = attributes[5];
-            this.GreenCost = attributes[6];
+            this.BlackCost = attributes[3];
+            this.WhiteCost = attributes[4];
+            this.RedCost = attributes[5];
+            this.BlueCost = attributes[6];
+            this.GreenCost = attributes[7];
         }
 
 

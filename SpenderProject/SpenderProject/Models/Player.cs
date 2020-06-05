@@ -9,8 +9,7 @@ namespace SpenderProject.Models
 {
     class Player
     {
-
-        public string PlayerName { get }
+        public string PlayerName { get; set; }
         public int Score { get; set; }
 
         public int WhiteCoins { get; set; }
@@ -48,7 +47,30 @@ namespace SpenderProject.Models
 
             this.GreenCoins = 0;
             this.GreenCards = 0;
+
+            this.WildCoins = 0;
+
+            this.HeldCards = new List<Card>();
         }
+
+        public Player(string playerName, int score, int whiteCoins, int blueCoins, int greenCoins, int redCoins, int blackCoins, int wildCoins, int whiteCards, int blueCards, int greenCards, int redCards, int blackCards, List<Card> heldCards) : this(playerName)
+        {
+            Score = score;
+            WhiteCoins = whiteCoins;
+            BlueCoins = blueCoins;
+            GreenCoins = greenCoins;
+            RedCoins = redCoins;
+            BlackCoins = blackCoins;
+            WildCoins = wildCoins;
+            WhiteCards = whiteCards;
+            BlueCards = blueCards;
+            GreenCards = greenCards;
+            RedCards = redCards;
+            BlackCards = blackCards;
+            HeldCards = heldCards;
+        }
+
+
 
         //Function for when a player attempts to buy a card
         public void BuyCard(Card card)
@@ -171,9 +193,7 @@ namespace SpenderProject.Models
             }
         }
 
-
-
-        public Boolean IsCardBuyable(Card card)
+        private Boolean IsCardBuyable(Card card)
         {
 
             int tempWildCoins = WildCoins;
@@ -262,7 +282,7 @@ namespace SpenderProject.Models
 
         }
 
-        public void CheckCoinCount()
+        private void CheckCoinCount()
         {
             if(GetSumOfCoins() > 10)
             {
@@ -291,7 +311,7 @@ namespace SpenderProject.Models
             GreenCoins -= green;
         }
 
-        public int GetSumOfCoins()
+        private int GetSumOfCoins()
         {
             return WhiteCoins + BlueCoins + GreenCoins + RedCoins + BlackCoins + WildCoins;
         }

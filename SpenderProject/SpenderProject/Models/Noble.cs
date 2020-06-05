@@ -31,7 +31,7 @@ namespace SpenderProject.Models
             GreenRequirement = greenRequirement;
         }
 
-        public Noble(int[] attributes)
+        public Noble(List<int> attributes)
         {
             Score = attributes[0];
 
