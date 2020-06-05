@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SpenderProject.Models
+{
+    class Board
+    {
+        public const string DeckAddress = "";
+        public const string NobleAddress = "";
+
+        public int NumberOfPlayers { get; set; }
+        public int NumberOfNoblesShown { get; set; }
+
+        public List<Card> Deck1 { get; set; }
+        public List<Card> Deck2 { get; set; }
+        public List<Card> Deck3 { get; set; }
+        public List<Noble> DeckNoble { get; set; }
+
+        public List<Card> Display1 { get; set; }
+        public List<Card> Display2 { get; set; }
+        public List<Card> Display3 { get; set; }
+        public List<Noble> DisplayNoble { get; set; }
+
+        public int WhiteCoins { get; set; }
+        public int BlackCoins { get; set; }
+        public int BlueCoins { get; set; }
+        public int RedCoins { get; set; }
+        public int GreenCoins { get; set; }
+        public int WildCoins { get; set; }
+
+        public Board(int numberOfPlayers)
+        {
+            NumberOfPlayers = numberOfPlayers;
+
+            WildCoins = 5;
+
+            if(NumberOfPlayers == 2)
+            {
+                WhiteCoins = 4;
+                BlackCoins = 4;
+                BlueCoins = 4;
+                RedCoins = 4;
+                GreenCoins = 4;
+                NumberOfNoblesShown = 3;
+            }
+            else if (NumberOfPlayers == 3)
+            {
+                WhiteCoins = 5;
+                BlackCoins = 5;
+                BlueCoins = 5;
+                RedCoins = 5;
+                GreenCoins = 5;
+                NumberOfNoblesShown = 4;
+            }
+            else if (NumberOfPlayers == 4)
+            {
+                WhiteCoins = 7;
+                BlackCoins = 7;
+                BlueCoins = 7;
+                RedCoins = 7;
+                GreenCoins = 7;
+                NumberOfNoblesShown = 5;
+            }
+
+            initializeDeck();
+            initializeNoble();
+
+        }
+
+        public void initializeDeck()
+        {
+            
+
+        }
+
+        public void initializeNoble()
+        {
+
+        }
+
+
+
+    }
+}
