@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpenderProject.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace SpenderProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            /*FileReader.ReadFile("./Resources/CSV/Cards.csv");
+
+            for(int i = 0; i < )*/
+
         }
     }
 }
