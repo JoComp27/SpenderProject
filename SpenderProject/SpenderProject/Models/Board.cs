@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SpenderProject.Models
 {
-    class Board
+    public class Board
     {
-        public const string DeckAddress = "./Resources/CSV/Cards.csv";
-        public const string NobleAddress = "./Resources/CSV/Nobles.csv";
+        public const string DeckAddress = @"..\\..\\Resources\\CSV\\Cards.csv";
+        public const string NobleAddress = @"..\\..\\Resources\\CSV\\Nobles.csv";
 
         public int NumberOfPlayers { get; set; }
         public int NumberOfNoblesShown { get; set; }
@@ -35,6 +35,16 @@ namespace SpenderProject.Models
         public Board(int numberOfPlayers)
         {
             NumberOfPlayers = numberOfPlayers;
+            this.Deck1 = new List<Card>();
+            this.Deck2 = new List<Card>();
+            this.Deck3 = new List<Card>();
+
+            this.Display1 = new List<Card>();
+            this.Display2 = new List<Card>();
+            this.Display3 = new List<Card>();
+
+            this.DeckNoble = new List<Noble>();
+            this.DisplayNoble = new List<Noble>();
 
             WildCoins = 5;
 
@@ -141,10 +151,15 @@ namespace SpenderProject.Models
             List<Card> newDeck2 = new List<Card>();
             List<Card> newDeck3 = new List<Card>();
 
-            for (int i = 0; i < Deck1.Count; i++)
+            int deck1Size = Deck1.Count;
+            int deck2Size = Deck2.Count;
+            int deck3Size = Deck3.Count;
+
+            for (int i = 0; i < deck1Size; i++)
             {
-                int max = Deck1.Count - (i+1);
-                
+                int max = deck1Size - (i+1);
+                max = ((max == -1)? 0 : max);
+
                 int index = random.Next(0, max);
                 newDeck1.Add(Deck1[index]);
                 Deck1.RemoveAt(index);
@@ -152,23 +167,25 @@ namespace SpenderProject.Models
 
             Deck1 = newDeck1;
 
-            for (int i = 0; i < Deck2.Count; i++)
+            for (int i = 0; i < deck2Size; i++)
             {
-                int max = Deck2.Count - (i + 1);
+                int max = deck2Size - (i + 1);
+                max = ((max == -1) ? 0 : max);
 
                 int index = random.Next(0, max);
-                newDeck2.Add(Deck1[index]);
+                newDeck2.Add(Deck2[index]);
                 Deck2.RemoveAt(index);
             }
 
             Deck2 = newDeck2;
 
-            for (int i = 0; i < Deck3.Count; i++)
+            for (int i = 0; i < deck3Size; i++)
             {
-                int max = Deck3.Count - (i + 1);
+                int max = deck3Size - (i + 1);
+                max = ((max == -1) ? 0 : max);
 
                 int index = random.Next(0, max);
-                newDeck1.Add(Deck3[index]);
+                newDeck3.Add(Deck3[index]);
                 Deck3.RemoveAt(index);
             }
 

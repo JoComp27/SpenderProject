@@ -1,6 +1,7 @@
 ﻿using SpenderProject.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,13 +16,10 @@ namespace SpenderProject
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-
-            /*FileReader.ReadFile("./Resources/CSV/Cards.csv");
-
-            for(int i = 0; i < )*/
+            Application.Run(new Base());
 
         }
     }

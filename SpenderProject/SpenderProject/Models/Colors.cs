@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace SpenderProject.Models
 {
-    enum Colors
+    public enum Colors
     {
         White,
         Blue,
         Green,
         Red,
         Black,
-        Wild
+        Wild,
+        Blank
     }
 }

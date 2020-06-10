@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpenderProject.Models
 {
-    class Card
+    public class Card
     {
         public Colors Color { get; }
 
@@ -50,7 +50,31 @@ namespace SpenderProject.Models
             this.GreenCost = attributes[7];
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Card card &&
+                   Color == card.Color &&
+                   Points == card.Points &&
+                   Level == card.Level &&
+                   WhiteCost == card.WhiteCost &&
+                   BlueCost == card.BlueCost &&
+                   GreenCost == card.GreenCost &&
+                   RedCost == card.RedCost &&
+                   BlackCost == card.BlackCost;
+        }
 
-
+        public override int GetHashCode()
+        {
+            int hashCode = -430228195;
+            hashCode = hashCode * -1521134295 + Color.GetHashCode();
+            hashCode = hashCode * -1521134295 + Points.GetHashCode();
+            hashCode = hashCode * -1521134295 + Level.GetHashCode();
+            hashCode = hashCode * -1521134295 + WhiteCost.GetHashCode();
+            hashCode = hashCode * -1521134295 + BlueCost.GetHashCode();
+            hashCode = hashCode * -1521134295 + GreenCost.GetHashCode();
+            hashCode = hashCode * -1521134295 + RedCost.GetHashCode();
+            hashCode = hashCode * -1521134295 + BlackCost.GetHashCode();
+            return hashCode;
+        }
     }
 }

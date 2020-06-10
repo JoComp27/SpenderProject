@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpenderProject.Models
 {
-    class Player
+    public class Player
     {
         public string PlayerName { get; set; }
         public int Score { get; set; }
@@ -255,8 +255,9 @@ namespace SpenderProject.Models
         {
             if(HeldCards.Count < 4)
             {
-                WildCoins++;
+                WildCoins++; //TODO: FIX THIS TO REMOVE COINS FROM BOARD
                 HeldCards.Add(card);
+                CheckCoinCount();
             }
             else
             {

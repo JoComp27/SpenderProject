@@ -11,14 +11,14 @@ namespace SpenderProject.Tools
     static class FileReader
     {
 
-        public static List<List<int>> ReadFile(string fileAddress)
+        public static List<List<int>> ReadFile(string relativePath)
         {
-
-            string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, fileAddress);
 
             List<List<int>> result = new List<List<int>>();
 
-            string[] lines = System.IO.File.ReadAllLines(path);
+            string fullPath = Path.GetFullPath(relativePath);
+
+            string[] lines = System.IO.File.ReadAllLines(Path.GetFullPath(fullPath));
 
             for(int i = 1; i < lines.Length; i++)
             {

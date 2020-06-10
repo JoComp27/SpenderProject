@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpenderProject.Models
 {
-    class Noble
+    public class Noble
     {
-
+        public int PortraitNumber { get; }
         public int Score { get; }
 
         public int WhiteRequirement { get; }
@@ -33,13 +33,14 @@ namespace SpenderProject.Models
 
         public Noble(List<int> attributes)
         {
-            Score = attributes[0];
+            PortraitNumber = attributes[0];
+            Score = attributes[1];
 
-            BlackRequirement = attributes[1];
-            WhiteRequirement = attributes[2];
-            RedRequirement = attributes[3];
-            BlueRequirement = attributes[4];
-            GreenRequirement = attributes[5];
+            BlackRequirement = attributes[2];
+            WhiteRequirement = attributes[3];
+            RedRequirement = attributes[4];
+            BlueRequirement = attributes[5];
+            GreenRequirement = attributes[6];
         }
 
     }
