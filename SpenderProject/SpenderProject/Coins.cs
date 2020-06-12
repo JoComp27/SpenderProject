@@ -15,9 +15,11 @@ namespace SpenderProject.Resources.Images
     public partial class Coins : UserControl
     {
 
-        List<Models.Colors> selectedCoins = new List<Models.Colors>();
-        Board board;
-        bool firstTime = true;
+        public Base parent;
+        public List<Models.Colors> selectedCoins { get; set; }
+        public Board board { get; set; }
+        public Board coinSelectionBoard { get; set; }
+        public bool firstTime { get; set; } = true;
 
 
         public Coins()
@@ -31,14 +33,13 @@ namespace SpenderProject.Resources.Images
             RedLabel.Text = "x 0";
             BlackLabel.Text = "x 0";
 
-            CancelButton.Visible = false;
-            ConfirmButton.Visible = false;
+            CancelConfirmVisibility(false);
 
         }
 
         public void LoadBoard(Models.Board board)
         {
-            this.board = board;
+            
             WildLabel.Text = "x " + board.WildCoins.ToString();
             WhiteLabel.Text = "x " + board.WhiteCoins.ToString();
             BlueLabel.Text = "x " + board.BlueCoins.ToString();
@@ -46,21 +47,43 @@ namespace SpenderProject.Resources.Images
             RedLabel.Text = "x " + board.RedCoins.ToString();
             BlackLabel.Text = "x " + board.BlackCoins.ToString();
 
-            WildCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Wild)), WildCoin.Width, WildCoin.Height);
-            WhiteCoin.Image = ImageResizer.ResizeImage((Image) new Bitmap(DirectorySelector.getChipDirectory(Colors.White)), WhiteCoin.Width, WhiteCoin.Height);
-            BlueCoin.Image = ImageResizer.ResizeImage((Image) new Bitmap(DirectorySelector.getChipDirectory(Colors.Blue)), BlueCoin.Width, BlueCoin.Height);
-            GreenCoin.Image = ImageResizer.ResizeImage((Image) new Bitmap(DirectorySelector.getChipDirectory(Colors.Green)), GreenCoin.Width, GreenCoin.Height);
-            RedCoin.Image = ImageResizer.ResizeImage((Image) new Bitmap(DirectorySelector.getChipDirectory(Colors.Red)), RedCoin.Width, RedCoin.Height);
-            BlackCoin.Image = ImageResizer.ResizeImage((Image) new Bitmap(DirectorySelector.getChipDirectory(Colors.Black)), BlackCoin.Width, BlackCoin.Height);
 
             if (firstTime)
             {
+
                 firstTime = false;
+
+                this.parent = (this.Parent as Base);
+
+                selectedCoins = new List<Models.Colors>();
+
+                this.board = board;
+                this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
+
                 CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
                 CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
                 CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
+
+                WildCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Wild)), WildCoin.Width, WildCoin.Height);
+                WhiteCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.White)), WhiteCoin.Width, WhiteCoin.Height);
+                BlueCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Blue)), BlueCoin.Width, BlueCoin.Height);
+                GreenCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Green)), GreenCoin.Width, GreenCoin.Height);
+                RedCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Red)), RedCoin.Width, RedCoin.Height);
+                BlackCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Black)), BlackCoin.Width, BlackCoin.Height);
             }
 
+        }
+
+        internal void removeCoin(Models.Colors color)
+        {
+            board.removeCoin(color);
+            LoadBoard(board);
+        }
+
+        internal void addCoin(Models.Colors color)
+        {
+            board.addCoin(color);
+            LoadBoard(board);
         }
 
         private void resetSelection()
@@ -92,7 +115,7 @@ namespace SpenderProject.Resources.Images
 
         private void WhiteCoin_Click(object sender, EventArgs e)
         {
-            if(selectedCoins.Count < 3)
+            if(selectedCoins.Count < 3 && coinSelectionBoard.WhiteCoins > 0)
             {
                 bool containsWhite = false;
 
@@ -107,19 +130,30 @@ namespace SpenderProject.Resources.Images
 
                 if (containsWhite)
                 {
-                    if(selectedCoins.Count == 1 && selectedCoins[0] == Colors.White && board.WhiteCoins > 3)
+                    if(selectedCoins.Count == 1 && selectedCoins[0] == Colors.White && coinSelectionBoard.WhiteCoins >= 3)
                     {
+                        coinSelectionBoard.removeCoin(Colors.White);
+                        LoadBoard(coinSelectionBoard);
                         selectedCoins.Add(Colors.White);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        CancelConfirmVisibility(true);
                     }
                 }
                 else
                 {
                     if (!(selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1]))
+                    {
                         selectedCoins.Add(Colors.White);
-                    CancelButton.Visible = true;
-                    ConfirmButton.Visible = true;
+                        coinSelectionBoard.removeCoin(Colors.White);
+                        LoadBoard(coinSelectionBoard);
+
+                        if(selectedCoins.Count == 3)
+                        {
+                            CancelConfirmVisibility(true);
+                        }
+                        
+                    }
+
+                    
                 }
                 resetSelection();
             }
@@ -127,7 +161,7 @@ namespace SpenderProject.Resources.Images
 
         private void BlueCoin_Click(object sender, EventArgs e)
         {
-            if (selectedCoins.Count < 3)
+            if (selectedCoins.Count < 3 && coinSelectionBoard.BlueCoins > 0)
             {
                 bool containsBlue = false;
 
@@ -142,19 +176,29 @@ namespace SpenderProject.Resources.Images
 
                 if (containsBlue)
                 {
-                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Blue && board.BlueCoins > 3)
+                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Blue && coinSelectionBoard.BlueCoins >= 3)
                     {
+                        coinSelectionBoard.removeCoin(Colors.Blue);
+                        LoadBoard(coinSelectionBoard);
                         selectedCoins.Add(Colors.Blue);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        CancelConfirmVisibility(true);
                     }
                 }
                 else
                 {
                     if (!(selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1]))
+                    {
                         selectedCoins.Add(Colors.Blue);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        coinSelectionBoard.removeCoin(Colors.Blue);
+                        LoadBoard(coinSelectionBoard);
+
+                        if (selectedCoins.Count == 3)
+                        {
+                            CancelConfirmVisibility(true);
+                        }
+                    }
+
+                    
                 }
                 resetSelection();
             }
@@ -162,7 +206,7 @@ namespace SpenderProject.Resources.Images
 
         private void GreenCoin_Click(object sender, EventArgs e)
         {
-            if (selectedCoins.Count < 3)
+            if (selectedCoins.Count < 3 && coinSelectionBoard.GreenCoins > 0)
             {
                 bool containsGreen = false;
 
@@ -177,19 +221,27 @@ namespace SpenderProject.Resources.Images
 
                 if (containsGreen)
                 {
-                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Green && board.GreenCoins > 3)
+                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Green && coinSelectionBoard.GreenCoins >= 3)
                     {
+                        coinSelectionBoard.removeCoin(Colors.Green);
+                        LoadBoard(coinSelectionBoard);
                         selectedCoins.Add(Colors.Green);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        CancelConfirmVisibility(true);
                     }
                 }
                 else
                 {
                     if (!(selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1]))
+                    {
                         selectedCoins.Add(Colors.Green);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        coinSelectionBoard.removeCoin(Colors.Green);
+                        LoadBoard(coinSelectionBoard);
+
+                        if (selectedCoins.Count == 3)
+                        {
+                            CancelConfirmVisibility(true);
+                        }
+                    }
                 }
                 resetSelection();
             }
@@ -197,7 +249,7 @@ namespace SpenderProject.Resources.Images
 
         private void RedCoin_Click(object sender, EventArgs e)
         {
-            if (selectedCoins.Count < 3)
+            if (selectedCoins.Count < 3 && coinSelectionBoard.RedCoins > 0)
             {
                 bool containsRed = false;
 
@@ -212,19 +264,28 @@ namespace SpenderProject.Resources.Images
 
                 if (containsRed)
                 {
-                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Red && board.RedCoins > 3)
+                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Red && coinSelectionBoard.RedCoins >= 3)
                     {
+                        coinSelectionBoard.removeCoin(Colors.Red);
+                        LoadBoard(coinSelectionBoard);
                         selectedCoins.Add(Colors.Red);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        CancelConfirmVisibility(true);
                     }
                 }
                 else
                 {
                     if (!(selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1]))
+                    {
                         selectedCoins.Add(Colors.Red);
-                    CancelButton.Visible = true;
-                    ConfirmButton.Visible = true;
+                        coinSelectionBoard.removeCoin(Colors.Red);
+                        LoadBoard(coinSelectionBoard);
+
+                        if (selectedCoins.Count == 3)
+                        {
+                            CancelConfirmVisibility(true);
+                        }
+                    }
+
                 }
                 resetSelection();
             }
@@ -232,7 +293,7 @@ namespace SpenderProject.Resources.Images
 
         private void BlackCoin_Click(object sender, EventArgs e)
         {
-            if (selectedCoins.Count < 3)
+            if (selectedCoins.Count < 3 && coinSelectionBoard.BlackCoins > 0)
             {
                 bool containsBlack = false;
 
@@ -247,20 +308,28 @@ namespace SpenderProject.Resources.Images
 
                 if (containsBlack)
                 {
-                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Black && board.BlackCoins > 3)
+                    if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Black && coinSelectionBoard.BlackCoins >= 3)
                     {
+                        coinSelectionBoard.removeCoin(Colors.Black);
+                        LoadBoard(coinSelectionBoard);
                         selectedCoins.Add(Colors.Black);
-                        CancelButton.Visible = true;
-                        ConfirmButton.Visible = true;
+                        CancelConfirmVisibility(true);
                     }
                 }
                 else
                 {
                     if (!(selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1]))
+                    {
                         selectedCoins.Add(Colors.Black);
+                        coinSelectionBoard.removeCoin(Colors.Black);
+                        LoadBoard(coinSelectionBoard);
 
-                    CancelButton.Visible = true;
-                    ConfirmButton.Visible = true;
+                        if (selectedCoins.Count == 3)
+                        {
+                            CancelConfirmVisibility(true);
+                        }
+                    }
+
                 }
                 resetSelection();
             }
@@ -270,14 +339,16 @@ namespace SpenderProject.Resources.Images
         {
             if (selectedCoins.Count > 0)
             {
+                coinSelectionBoard.addCoin(selectedCoins[0]);
                 selectedCoins.RemoveAt(0);
                 resetSelection();
 
                 if(selectedCoins.Count == 0)
                 {
-                    CancelButton.Visible = false;
-                    ConfirmButton.Visible = false;
+                    CancelConfirmVisibility(false);
                 }
+
+                LoadBoard(coinSelectionBoard);
 
             }
         }
@@ -286,8 +357,10 @@ namespace SpenderProject.Resources.Images
         {
             if (selectedCoins.Count > 1)
             {
+                coinSelectionBoard.addCoin(selectedCoins[1]);
                 selectedCoins.RemoveAt(1);
                 resetSelection();
+                LoadBoard(coinSelectionBoard);
 
             }
         }
@@ -296,8 +369,10 @@ namespace SpenderProject.Resources.Images
         {
             if(selectedCoins.Count > 2)
             {
+                coinSelectionBoard.addCoin(selectedCoins[2]);
                 selectedCoins.RemoveAt(2);
                 resetSelection();
+                LoadBoard(coinSelectionBoard);
             }
         }
 
@@ -306,21 +381,32 @@ namespace SpenderProject.Resources.Images
             selectedCoins.Clear();
             resetSelection();
 
-            CancelButton.Visible = false;
-            ConfirmButton.Visible = false;
+            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
+            LoadBoard(coinSelectionBoard);
+
+            CancelConfirmVisibility(false);
 
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            //TODO: USE FN TO SEND SELECTED COINS TO PLAYER OBJ
-            //TODO: USE FN TO REMOVE COINS FROM global board
+            parent.giveCoinsToActivePlayer(selectedCoins);
 
             selectedCoins.Clear();
             resetSelection();
 
-            CancelButton.Visible = false;
-            ConfirmButton.Visible = false;
+            board.setCoins(coinSelectionBoard.WhiteCoins, coinSelectionBoard.BlackCoins, coinSelectionBoard.RedCoins, 
+                coinSelectionBoard.BlackCoins, coinSelectionBoard.GreenCoins, coinSelectionBoard.WildCoins);
+
+            CancelConfirmVisibility(false);
+
+            parent.endActivePlayerTurn();
+        }
+
+        private void CancelConfirmVisibility(bool value)
+        {
+            CancelButton.Visible = value;
+            ConfirmButton.Visible = value;
         }
     }
 }

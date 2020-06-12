@@ -19,6 +19,10 @@ namespace SpenderProject
         public Noble()
         {
             InitializeComponent();
+            Score.Text = "";
+            ReqNum1.Text = "";
+            ReqNum2.Text = "";
+            ReqNum3.Text = "";
         }
 
         public void visibleNoble(bool value)
@@ -34,9 +38,7 @@ namespace SpenderProject
 
             List<Colors> cardColors = new List<Colors>();
 
-            ReqNum1.Text = "";
-            ReqNum2.Text = "";
-            ReqNum3.Text = "";
+            Score.Text = (noble.Score).ToString();
 
             requirementImage1.Visible = false;
             requirementImage2.Visible = false;

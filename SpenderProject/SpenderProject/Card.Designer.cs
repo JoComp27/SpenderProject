@@ -173,7 +173,7 @@
             this.Controls.Add(this.holdButton);
             this.Name = "Card";
             this.Size = new System.Drawing.Size(115, 160);
-            this.MouseEnter += new System.EventHandler(this.backgroundPicture_mouseEntered);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.backgroundPicture_mouseEntered);
             ((System.ComponentModel.ISupportInitialize)(this.requirementImage3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.requirementImage2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.requirementImage4)).EndInit();

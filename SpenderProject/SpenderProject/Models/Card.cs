@@ -50,6 +50,20 @@ namespace SpenderProject.Models
             this.GreenCost = attributes[7];
         }
 
+        //Copy Constructor
+        public Card(Card card)
+        {
+            this.Color = card.Color;
+            this.Level = card.Level;
+            this.Points = card.Points;
+
+            this.WhiteCost = card.WhiteCost;
+            this.BlueCost = card.BlueCost;
+            this.GreenCost = card.GreenCost;
+            this.RedCost = card.RedCost;
+            this.BlackCost = card.BlackCost;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Card card &&
@@ -75,6 +89,12 @@ namespace SpenderProject.Models
             hashCode = hashCode * -1521134295 + RedCost.GetHashCode();
             hashCode = hashCode * -1521134295 + BlackCost.GetHashCode();
             return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return "{Color: " + Color + ", Level: " + Level.ToString() + ", Points: " + Points + ", WhiteCost: " + WhiteCost + ", BlueCost: " + BlueCost + ", GreenCost: " + 
+                GreenCost + ", RedCost: " + RedCost + ", BlackCost: " + BlackCost + "}";
         }
     }
 }

@@ -19,6 +19,7 @@ namespace SpenderProject.Models
         public Game(string gameTitle, int numberOfPlayers)
         {
             this.gameTitle = gameTitle;
+            this.players = new List<Player>();
 
             board = new Board(numberOfPlayers);
 
@@ -30,6 +31,8 @@ namespace SpenderProject.Models
             this.numberOfPlayers = numberOfPlayers;
 
         }
+
+
 
         public void endCurrentTurn()
         {
@@ -46,5 +49,63 @@ namespace SpenderProject.Models
             players[ActivePlayer].holdCard(card);
         }
 
+        public bool checkBuy(Card card)
+        {
+            return players[ActivePlayer].IsCardBuyable(card);
+        }
+
+        public bool checkHold(Models.Card card)
+        {
+            return players[ActivePlayer].isCardHoldable(card);
+        }
+
+        internal void giveCoinsToActivePlayer(List<Colors> coins)
+        {
+
+            int white = 0;
+            int blue = 0;
+            int red = 0;
+            int black = 0;
+            int wild = 0;
+            int green = 0;
+
+            for(int i = 0; i < coins.Count; i++)
+            {
+                switch (coins[i])
+                {
+                    case Colors.White:
+                        white++;
+                        break;
+                    case Colors.Blue:
+                        blue++;
+                        break;
+                    case Colors.Red:
+                        red++;
+                        break;
+                    case Colors.Black:
+                        black++;
+                        break;
+                    case Colors.Wild:
+                        wild++;
+                        break;
+                    case Colors.Green:
+                        green++;
+                        break;
+                }
+            }
+
+            players[ActivePlayer].AddCoins(white, black, red, blue, green, wild);
+
+        }
+
+        internal void currentPlayerAddWildCoin()
+        {
+            players[ActivePlayer].AddCoins(0, 0, 0, 0, 0, 1);
+        }
+
+        internal bool checkActivePlayerCoins()
+        {
+            return players[ActivePlayer].CheckCoinCount();
+        }
     }
 }

@@ -13,8 +13,9 @@ namespace SpenderProject
     public partial class Card : UserControl
     {
 
-        Models.Card card;
+        public Models.Card card { get; set; }
         Shop parentForm;
+        bool firstTime = true;
 
         public Card()
         {
@@ -26,9 +27,17 @@ namespace SpenderProject
         public void setCard(Models.Card card)
         {
 
-            parentForm = (this.Parent as Shop);
+            if (firstTime)
+            {
+                firstTime = false;
 
-            this.card = card;
+                parentForm = (this.Parent as Shop);
+
+                this.BackgroundImage = (Image)ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getBackgroundPath(card)), this.Width, this.Height);
+                ColorImage.Image = (Image)ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getGemDirectory(card)), ColorImage.Width, ColorImage.Height);
+            }
+
+            this.card = new Models.Card(card);
 
             if(card.Points != 0)
             {
@@ -39,8 +48,6 @@ namespace SpenderProject
                 Score.Text = "";
             }
 
-            this.BackgroundImage = (Image) ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getBackgroundPath(card)), this.Width, this.Height);
-            ColorImage.Image = (Image) ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getGemDirectory(card)), ColorImage.Width, ColorImage.Height);
 
             List<Colors> cardColors = new List<Colors>();
 
@@ -244,6 +251,7 @@ namespace SpenderProject
 
         public void enableBuyButton(bool value)
         {
+            Console.WriteLine("CARD");
             buyButton.Enabled = value;
         }
 
@@ -267,5 +275,15 @@ namespace SpenderProject
         {
             parentForm.holdClicked(card);
         }
+
+        private void backgroundPicture_mouseEntered(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine(card.ToString());
+            Console.WriteLine("CARD");
+            showButtons(true);
+            parentForm.CheckBuyHold(card);
+        }
+
+
     }
 }

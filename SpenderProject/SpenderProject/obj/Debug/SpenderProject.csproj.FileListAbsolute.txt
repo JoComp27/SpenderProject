@@ -1,7 +1,6 @@
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.exe.config
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.exe
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.pdb
-C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.csprojAssemblyReference.cache
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Card.resources
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Deck.resources
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Base.resources
@@ -13,3 +12,5 @@ C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.csproj.CoreCompileInputs.cache
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.exe
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.pdb
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.csprojAssemblyReference.cache
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.PlayerStatus.resources

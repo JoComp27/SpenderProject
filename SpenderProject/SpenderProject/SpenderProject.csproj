@@ -76,6 +76,12 @@
     <Compile Include="Noble.Designer.cs">
       <DependentUpon>Noble.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlayerStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PlayerStatus.Designer.cs">
+      <DependentUpon>PlayerStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Coins.cs">
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Noble.resx">
       <DependentUpon>Noble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerStatus.resx">
+      <DependentUpon>PlayerStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

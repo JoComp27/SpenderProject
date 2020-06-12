@@ -81,6 +81,16 @@ namespace SpenderProject.Models
 
         }
 
+        public Board(int whiteCoins, int blueCoins, int redCoins, int blackCoins, int greenCoins, int wildCoins)
+        {
+            WhiteCoins = whiteCoins;
+            BlueCoins = blueCoins;
+            RedCoins = redCoins;
+            BlackCoins = blackCoins;
+            GreenCoins = greenCoins;
+            WildCoins = wildCoins;
+        }
+
         private void initializeDeck()
         {
             List<List<int>> intDeck = FileReader.ReadFile(DeckAddress);
@@ -247,6 +257,66 @@ namespace SpenderProject.Models
         public void refreshVisuals()
         {
             //TODO: SEE IF VISUALS CAN BE REFRESHED FROM LOGIC SIDE
+        }
+
+        public void removeCoin(Models.Colors color)
+        {
+            switch (color)
+            {
+                case Colors.White:
+                    WhiteCoins--;
+                    break;
+                case Colors.Black:
+                    BlackCoins--;
+                    break;
+                case Colors.Blue:
+                    BlueCoins--;
+                    break;
+                case Colors.Green:
+                    GreenCoins--;
+                    break;
+                case Colors.Red:
+                    RedCoins--;
+                    break;
+                case Colors.Wild:
+                    WildCoins--;
+                    break;
+            }
+        }
+
+        public void addCoin(Models.Colors color)
+        {
+            switch (color)
+            {
+                case Colors.White:
+                    WhiteCoins++;
+                    break;
+                case Colors.Black:
+                    BlackCoins++;
+                    break;
+                case Colors.Blue:
+                    BlueCoins++;
+                    break;
+                case Colors.Green:
+                    GreenCoins++;
+                    break;
+                case Colors.Red:
+                    RedCoins++;
+                    break;
+                case Colors.Wild:
+                    WildCoins++;
+                    break;
+            }
+        }
+
+        public void setCoins(int whiteCoins, int blueCoins, int redCoins, int blackCoins, int greenCoins, int wildCoins)
+        {
+            WhiteCoins = whiteCoins;
+            BlueCoins = blueCoins;
+            RedCoins = redCoins;
+            BlackCoins = blackCoins;
+            GreenCoins = greenCoins;
+            WildCoins = wildCoins;
         }
 
     }

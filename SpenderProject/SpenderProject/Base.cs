@@ -30,32 +30,49 @@ namespace SpenderProject
         {
             game = new Game(gameTitle, numberOfPlayers);
             coins1.LoadBoard(game.board);
-            shop1.loadBoard(game.board);
+            shop1.loadBoard(game.board, numberOfPlayers);
         }
 
-        internal void updateDecks(int v, List<Models.Card> deck2, List<Models.Card> display2)
+        internal void CheckPlayerBuyHold(Models.Card card)
         {
-            throw new NotImplementedException();
-        }
+            Console.WriteLine("BASE");
+            
+            bool isBuyable = game.checkBuy(card);
+            bool isHoldable = game.checkHold(card);
 
-        internal void CheckPlayerBuyHold()
-        {
-            throw new NotImplementedException();
+            shop1.buyHoldSet(card, isBuyable, isHoldable);
+
         }
 
         internal void buyCard(Models.Card card)
         {
-            throw new NotImplementedException();
+            game.currentPlayerBuysCard(card);
         }
 
         internal void HoldCard(Models.Card card)
         {
-            throw new NotImplementedException();
+            game.currentPlayerHoldsCard(card);
+            if(coins1.board.WildCoins > 0)
+            {
+                game.currentPlayerAddWildCoin();
+                coins1.removeCoin(Models.Colors.Wild);
+            }
         }
 
         internal bool CheckPlayerCoins()
         {
-            throw new NotImplementedException();
+            return game.checkActivePlayerCoins();
+        }
+
+        internal void giveCoinsToActivePlayer(List<Colors> coins)
+        {
+            game.giveCoinsToActivePlayer(coins);
+        }
+
+        internal void endActivePlayerTurn()
+        {
+            //game.endCurrentTurn();
+            //TODO: Trigger Player UI to change Active visual
         }
     }
 }

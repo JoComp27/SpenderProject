@@ -29,6 +29,7 @@ namespace SpenderProject.Models
 
         public Player(string PlayerName)
         {
+
             this.PlayerName = PlayerName;
 
             this.Score = 0;
@@ -193,7 +194,7 @@ namespace SpenderProject.Models
             }
         }
 
-        private Boolean IsCardBuyable(Card card)
+        public Boolean IsCardBuyable(Card card)
         {
 
             int tempWildCoins = WildCoins;
@@ -251,13 +252,17 @@ namespace SpenderProject.Models
             return true;
         }
 
+        public bool isCardHoldable(Models.Card card)
+        {
+            return HeldCards.Count < 4;
+        }
+
         public void holdCard(Card card)
         {
             if(HeldCards.Count < 4)
             {
                 WildCoins++; //TODO: FIX THIS TO REMOVE COINS FROM BOARD
                 HeldCards.Add(card);
-                CheckCoinCount();
             }
             else
             {
@@ -283,33 +288,31 @@ namespace SpenderProject.Models
 
         }
 
-        private void CheckCoinCount()
+        public bool CheckCoinCount()
         {
-            if(GetSumOfCoins() > 10)
-            {
-                //TODO: ADD COIN REMOVAL PORTION
-                Console.WriteLine("PLAYER HAS TOO MANY COINS");
-            }
+            return GetSumOfCoins() < 10;
         }
 
-        public void AddCoins(int white, int black, int red, int blue, int green)
+        public void AddCoins(int white, int black, int red, int blue, int green, int wild)
         {
             WhiteCoins += white;
             BlackCoins += black;
             RedCoins += red;
             BlueCoins += blue;
             GreenCoins += green;
+            WildCoins += wild;
 
-            CheckCoinCount();
+            CheckCoinCount(); //TODO: ADD REMOVING COINS PART FROM HERE
         }
 
-        public void RemoveCoins(int white, int black, int red, int blue, int green)
+        public void RemoveCoins(int white, int black, int red, int blue, int green, int wild)
         {
             WhiteCoins -= white;
             BlackCoins -= black;
             RedCoins -= red;
             BlueCoins -= blue;
             GreenCoins -= green;
+            WildCoins -= wild;
         }
 
         private int GetSumOfCoins()

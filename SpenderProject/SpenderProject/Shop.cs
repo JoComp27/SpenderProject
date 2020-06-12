@@ -23,7 +23,7 @@ namespace SpenderProject
             InitializeComponent();
         }
 
-        public void loadBoard(Models.Board board)
+        public void loadBoard(Models.Board board, int numberOfPlayers)
         {
             this.board = board;
 
@@ -37,28 +37,61 @@ namespace SpenderProject
                 deck2.setLevel(2);
                 deck3.setLevel(3);
 
+                if (numberOfPlayers == 2)
+                {
+                    noble3.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble4.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble5.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                }
+                else if(numberOfPlayers == 3)
+                {
+                    noble2.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble3.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble4.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble5.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                }
+                else if (numberOfPlayers == 4)
+                {
+                    noble1.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble2.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble3.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble4.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                    noble5.setNoble(board.DisplayNoble[0]);
+                    board.DisplayNoble.RemoveAt(0);
+                }
 
+                
             }
-            
+
+                card3_1.setCard(board.Display3[0]);
+                card3_2.setCard(board.Display3[1]);
+                card3_3.setCard(board.Display3[2]);
+                card3_4.setCard(board.Display3[3]);
+
+                card2_1.setCard(board.Display2[0]);
+                card2_2.setCard(board.Display2[1]);
+                card2_3.setCard(board.Display2[2]);
+                card2_4.setCard(board.Display2[3]);
+
+                card1_1.setCard(board.Display1[0]);
+                card1_2.setCard(board.Display1[1]);
+                card1_3.setCard(board.Display1[2]);
+                card1_4.setCard(board.Display1[3]);
 
             deck1.setNumber(board.Deck1.Count);
             deck2.setNumber(board.Deck2.Count);
             deck3.setNumber(board.Deck3.Count);
-
-            card3_1.setCard(board.Display3[0]);
-            card3_2.setCard(board.Display3[1]);
-            card3_3.setCard(board.Display3[2]);
-            card3_4.setCard(board.Display3[3]);
-
-            card2_1.setCard(board.Display2[0]);
-            card2_2.setCard(board.Display2[1]);
-            card2_3.setCard(board.Display2[2]);
-            card2_4.setCard(board.Display2[3]);
-
-            card1_1.setCard(board.Display1[0]);
-            card1_2.setCard(board.Display1[1]);
-            card1_3.setCard(board.Display1[2]);
-            card1_4.setCard(board.Display1[3]);
 
         }
 
@@ -130,16 +163,16 @@ namespace SpenderProject
                 case 1:
                     switch (index)
                     {
-                        case 1:
+                        case 0:
                             card1_1.setCard(card);
                             break;
-                        case 2:
+                        case 1:
                             card1_2.setCard(card);
                             break;
-                        case 3:
+                        case 2:
                             card1_3.setCard(card);
                             break;
-                        case 4:
+                        case 3:
                             card1_4.setCard(card);
                             break;
                     }
@@ -147,16 +180,16 @@ namespace SpenderProject
                 case 2:
                     switch (index)
                     {
-                        case 1:
+                        case 0:
                             card2_1.setCard(card);
                             break;
-                        case 2:
+                        case 1:
                             card2_2.setCard(card);
                             break;
-                        case 3:
+                        case 2:
                             card2_3.setCard(card);
                             break;
-                        case 4:
+                        case 3:
                             card2_4.setCard(card);
                             break;
                     }
@@ -164,16 +197,16 @@ namespace SpenderProject
                 case 3:
                     switch (index)
                     {
-                        case 1:
+                        case 0:
                             card3_1.setCard(card);
                             break;
-                        case 2:
+                        case 1:
                             card3_2.setCard(card);
                             break;
-                        case 3:
+                        case 2:
                             card3_3.setCard(card);
                             break;
-                        case 4:
+                        case 3:
                             card3_4.setCard(card);
                             break;
                     }
@@ -222,9 +255,9 @@ namespace SpenderProject
                         Thread.Sleep(1000);
                     }
 
-                    replaceCard(cardLevel, i, board.Deck1[0]);
-                    board.Deck1.RemoveAt(0);
-                    parent.updateDecks(1, board.Deck1, board.Display1); // UPDATE DISPLAY1 and DECK1 in GLOBAL DECK
+                    board.replaceDeck1Card(i);
+                    parent.endActivePlayerTurn();
+                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
                     break;
 
                 case 2:
@@ -243,9 +276,9 @@ namespace SpenderProject
                         Thread.Sleep(1000);
                     }
 
-                    replaceCard(cardLevel, i, board.Deck2[0]);
-                    board.Deck2.RemoveAt(0);
-                    parent.updateDecks(2, board.Deck2, board.Display2); // UPDATE DISPLAY2 and DECK2 in GLOBAL DECK
+                    board.replaceDeck2Card(i);
+                    parent.endActivePlayerTurn();
+                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
                     break;
 
                 case 3:
@@ -264,9 +297,9 @@ namespace SpenderProject
                         Thread.Sleep(1000);
                     }
                     
-                    replaceCard(cardLevel, i, board.Deck3[0]);
-                    board.Deck3.RemoveAt(0);
-                    parent.updateDecks(3, board.Deck3, board.Display3); // UPDATE DISPLAY3 and DECK3 in GLOBAL DECK
+                    board.replaceDeck3Card(i);
+                    parent.endActivePlayerTurn();
+                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
                     break;
             }
 
@@ -274,8 +307,128 @@ namespace SpenderProject
 
         internal void CheckBuyHold(Models.Card card)
         {
-            parent.CheckPlayerBuyHold();
-            throw new NotImplementedException();
+            Console.WriteLine("SHOP");
+            parent.CheckPlayerBuyHold(card);
+        }
+
+        public void buyHoldSet(Models.Card card, bool buy, bool hold)
+        {
+
+            int level = card.Level;
+            int cardNumber = -1;
+
+            switch (level)
+            {
+                case 1:
+                    for(int i = 0; i < board.Display1.Count; i++)
+                    {
+
+                        if(i == 1)
+                        {
+                            Console.WriteLine("Board1_2: " + board.Display1[i].ToString());
+                            Console.WriteLine("EQUALS");
+                            Console.WriteLine("Card: " + card.ToString());
+                        }
+
+                        if (board.Display1[i].Equals(card))
+                        {
+                            cardNumber = i;
+                        }
+                        
+                    }
+                    break;
+                case 2:
+                    for (int i = 0; i < board.Display2.Count; i++)
+                    {
+                        if (board.Display2[i].Equals(card))
+                        {
+                            cardNumber = i;
+                        }
+
+                    }
+                    break;
+                case 3:
+                    for (int i = 0; i < board.Display3.Count; i++)
+                    {
+                        if (board.Display3[i].Equals(card))
+                        {
+                            cardNumber = i;
+                        }
+
+                    }
+                    break;
+            }
+
+            Console.WriteLine("Level: " + level + ", Card Number: " + cardNumber);
+
+            switch (level)
+            {
+                case 1:
+                    switch (cardNumber)
+                    {
+                        case 0:
+                            card1_1.enableBuyButton(buy);
+                            card1_1.enableHoldButton(hold);
+                            break;
+                        case 1:
+                            
+                            card1_2.enableBuyButton(buy);
+                            card1_2.enableHoldButton(hold);
+                            break;
+                        case 2:
+                            card1_3.enableBuyButton(buy);
+                            card1_3.enableHoldButton(hold);
+                            break;
+                        case 3:
+                            card1_4.enableBuyButton(buy);
+                            card1_4.enableHoldButton(hold);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (cardNumber)
+                    {
+                        case 0:
+                            card2_1.enableBuyButton(buy);
+                            card2_1.enableHoldButton(hold);
+                            break;
+                        case 1:
+                            card2_2.enableBuyButton(buy);
+                            card2_2.enableHoldButton(hold);
+                            break;
+                        case 2:
+                            card2_3.enableBuyButton(buy);
+                            card2_3.enableHoldButton(hold);
+                            break;
+                        case 3:
+                            card2_4.enableBuyButton(buy);
+                            card2_4.enableHoldButton(hold);
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (cardNumber)
+                    {
+                        case 0:
+                            card3_1.enableBuyButton(buy);
+                            card3_1.enableHoldButton(hold);
+                            break;
+                        case 1:
+                            card3_2.enableBuyButton(buy);
+                            card3_2.enableHoldButton(hold);
+                            break;
+                        case 2:
+                            card3_3.enableBuyButton(buy);
+                            card3_3.enableHoldButton(hold);
+                            break;
+                        case 3:
+                            card3_4.enableBuyButton(buy);
+                            card3_4.enableHoldButton(hold);
+                            break;
+                    }
+                    break;
+            }
+
         }
 
         //Function for Card to call when Buy is clicked
@@ -293,10 +446,10 @@ namespace SpenderProject
                             break;
                         }
                     }
-                    replaceCard(cardLevel, i, board.Deck1[0]);
-                    board.Deck1.RemoveAt(0);
-                    parent.updateDecks(1, board.Deck1, board.Display1); // UPDATE DISPLAY1 and DECK1 in GLOBAL DECK
+                    board.replaceDeck1Card(i);
                     parent.buyCard(card); //ADD PLAYER BUY CARD
+                    parent.endActivePlayerTurn();
+                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
                     break;
 
                 case 2:
@@ -307,10 +460,10 @@ namespace SpenderProject
                             break;
                         }
                     }
-                    replaceCard(cardLevel, i, board.Deck2[0]);
-                    board.Deck2.RemoveAt(0);
-                    parent.updateDecks(2, board.Deck2, board.Display2); // UPDATE DISPLAY2 and DECK2 in GLOBAL DECK
+                    board.replaceDeck2Card(i);
                     parent.buyCard(card); //ADD PLAYER BUY CARD
+                    parent.endActivePlayerTurn();
+                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
                     break;
 
                 case 3:
@@ -321,10 +474,10 @@ namespace SpenderProject
                             break;
                         }
                     }
-                    replaceCard(cardLevel, i, board.Deck3[0]);
-                    board.Deck3.RemoveAt(0);
-                    parent.updateDecks(3, board.Deck3, board.Display3); // UPDATE DISPLAY3 and DECK3 in GLOBAL DECK
+                    board.replaceDeck3Card(i);
                     parent.buyCard(card); //ADD PLAYER BUY CARD
+                    parent.endActivePlayerTurn();
+                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
                     break;
             }
         }
