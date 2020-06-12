@@ -74,6 +74,14 @@ namespace SpenderProject.Resources.Images
 
         }
 
+        internal void addCoins(List<Colors> colors)
+        {
+            foreach(Models.Colors color in colors)
+            {
+                addCoin(color);
+            }
+        }
+
         internal void removeCoin(Models.Colors color)
         {
             board.removeCoin(color);

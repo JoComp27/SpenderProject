@@ -39,9 +39,9 @@ namespace SpenderProject.Models
             ActivePlayer = (ActivePlayer + 1) % numberOfPlayers;
         }
 
-        public void currentPlayerBuysCard(Card card)
+        public List<Models.Colors> currentPlayerBuysCard(Card card)
         {
-            players[ActivePlayer].BuyCard(card);
+            return players[ActivePlayer].BuyCard(card);
         }
 
         public void currentPlayerHoldsCard(Card card)

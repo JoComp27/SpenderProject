@@ -74,10 +74,12 @@ namespace SpenderProject.Models
 
 
         //Function for when a player attempts to buy a card
-        public void BuyCard(Card card)
+        public List<Models.Colors> BuyCard(Card card)
         {
             if (IsCardBuyable(card))
             {
+                List<Models.Colors> colors = new List<Models.Colors>();
+
                 //Increment Score by card's score
                 Score += card.Points;
 
@@ -186,11 +188,15 @@ namespace SpenderProject.Models
 
                 }
 
+                return colors;
+
             }
             else
             {
+
                 //TODO: ADD VISUAL INDICATOR FOR ILLEGAL BUY
                 Console.WriteLine("PLAYER IS ATTEMPTING TO BUY A CARD, ILLEGAL MOVE");
+                return new List<Models.Colors>();
             }
         }
 

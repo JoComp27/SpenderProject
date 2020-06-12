@@ -31,6 +31,7 @@ namespace SpenderProject
             game = new Game(gameTitle, numberOfPlayers);
             coins1.LoadBoard(game.board);
             shop1.loadBoard(game.board, numberOfPlayers);
+            playerStatus1.loadGame(game);
         }
 
         internal void CheckPlayerBuyHold(Models.Card card)
@@ -46,13 +47,18 @@ namespace SpenderProject
 
         internal void buyCard(Models.Card card)
         {
-            game.currentPlayerBuysCard(card);
+
+            coins1.addCoins(game.currentPlayerBuysCard(card));
+
+            playerStatus1.loadGame(game);
         }
 
         internal void HoldCard(Models.Card card)
         {
             game.currentPlayerHoldsCard(card);
-            if(coins1.board.WildCoins > 0)
+            playerStatus1.loadGame(game);
+
+            if (coins1.board.WildCoins > 0)
             {
                 game.currentPlayerAddWildCoin();
                 coins1.removeCoin(Models.Colors.Wild);
@@ -67,11 +73,13 @@ namespace SpenderProject
         internal void giveCoinsToActivePlayer(List<Colors> coins)
         {
             game.giveCoinsToActivePlayer(coins);
+            playerStatus1.loadGame(game);
         }
 
         internal void endActivePlayerTurn()
         {
-            //game.endCurrentTurn();
+            game.endCurrentTurn();
+            playerStatus1.loadGame(game);
             //TODO: Trigger Player UI to change Active visual
         }
     }
