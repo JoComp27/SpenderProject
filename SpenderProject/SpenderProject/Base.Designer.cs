@@ -30,10 +30,26 @@ namespace SpenderProject
         /// </summary>
         private void InitializeComponent()
         {
-            this.coins1 = new SpenderProject.Resources.Images.Coins();
-            this.shop1 = new SpenderProject.Shop();
             this.playerStatus1 = new SpenderProject.PlayerStatus();
+            this.shop1 = new SpenderProject.Shop();
+            this.coins1 = new SpenderProject.Resources.Images.Coins();
             this.SuspendLayout();
+            // 
+            // playerStatus1
+            // 
+            this.playerStatus1.BackColor = System.Drawing.Color.Transparent;
+            this.playerStatus1.Location = new System.Drawing.Point(3, -1);
+            this.playerStatus1.Name = "playerStatus1";
+            this.playerStatus1.Size = new System.Drawing.Size(1311, 242);
+            this.playerStatus1.TabIndex = 18;
+            // 
+            // shop1
+            // 
+            this.shop1.BackColor = System.Drawing.Color.Transparent;
+            this.shop1.Location = new System.Drawing.Point(3, 247);
+            this.shop1.Name = "shop1";
+            this.shop1.Size = new System.Drawing.Size(758, 690);
+            this.shop1.TabIndex = 17;
             // 
             // coins1
             // 
@@ -46,22 +62,6 @@ namespace SpenderProject
             this.coins1.selectedCoins = null;
             this.coins1.Size = new System.Drawing.Size(367, 672);
             this.coins1.TabIndex = 16;
-            // 
-            // shop1
-            // 
-            this.shop1.BackColor = System.Drawing.Color.Transparent;
-            this.shop1.Location = new System.Drawing.Point(3, 247);
-            this.shop1.Name = "shop1";
-            this.shop1.Size = new System.Drawing.Size(758, 690);
-            this.shop1.TabIndex = 17;
-            // 
-            // playerStatus1
-            // 
-            this.playerStatus1.BackColor = System.Drawing.Color.Transparent;
-            this.playerStatus1.Location = new System.Drawing.Point(3, -1);
-            this.playerStatus1.Name = "playerStatus1";
-            this.playerStatus1.Size = new System.Drawing.Size(1311, 120);
-            this.playerStatus1.TabIndex = 18;
             // 
             // Base
             // 

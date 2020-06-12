@@ -74,20 +74,20 @@ namespace SpenderProject
                 
             }
 
-                card3_1.setCard(board.Display3[0]);
-                card3_2.setCard(board.Display3[1]);
-                card3_3.setCard(board.Display3[2]);
-                card3_4.setCard(board.Display3[3]);
+                card3_1.setCard(board.Display3[0], true);
+                card3_2.setCard(board.Display3[1], true);
+                card3_3.setCard(board.Display3[2], true);
+                card3_4.setCard(board.Display3[3], true);
 
-                card2_1.setCard(board.Display2[0]);
-                card2_2.setCard(board.Display2[1]);
-                card2_3.setCard(board.Display2[2]);
-                card2_4.setCard(board.Display2[3]);
+                card2_1.setCard(board.Display2[0], true);
+                card2_2.setCard(board.Display2[1], true);
+                card2_3.setCard(board.Display2[2], true);
+                card2_4.setCard(board.Display2[3], true);
 
-                card1_1.setCard(board.Display1[0]);
-                card1_2.setCard(board.Display1[1]);
-                card1_3.setCard(board.Display1[2]);
-                card1_4.setCard(board.Display1[3]);
+                card1_1.setCard(board.Display1[0], true);
+                card1_2.setCard(board.Display1[1], true);
+                card1_3.setCard(board.Display1[2], true);
+                card1_4.setCard(board.Display1[3], true);
 
             deck1.setNumber(board.Deck1.Count);
             deck2.setNumber(board.Deck2.Count);
@@ -106,16 +106,16 @@ namespace SpenderProject
                     switch (index)
                     {
                         case 1:
-                            card1_1.setCard(blankCard);
+                            card1_1.setCard(blankCard, true);
                             break;
                         case 2:
-                            card1_2.setCard(blankCard);
+                            card1_2.setCard(blankCard, true);
                             break;
                         case 3:
-                            card1_3.setCard(blankCard);
+                            card1_3.setCard(blankCard, true);
                             break;
                         case 4:
-                            card1_4.setCard(blankCard);
+                            card1_4.setCard(blankCard, true);
                             break;
                     }
                     break;
@@ -123,16 +123,16 @@ namespace SpenderProject
                     switch (index)
                     {
                         case 1:
-                            card2_1.setCard(blankCard);
+                            card2_1.setCard(blankCard, true);
                             break;
                         case 2:
-                            card2_2.setCard(blankCard);
+                            card2_2.setCard(blankCard, true);
                             break;
                         case 3:
-                            card2_3.setCard(blankCard);
+                            card2_3.setCard(blankCard, true);
                             break;
                         case 4:
-                            card2_4.setCard(blankCard);
+                            card2_4.setCard(blankCard, true);
                             break;
                     }
                     break;
@@ -140,16 +140,16 @@ namespace SpenderProject
                     switch (index)
                     {
                         case 1:
-                            card3_1.setCard(blankCard);
+                            card3_1.setCard(blankCard, true);
                             break;
                         case 2:
-                            card3_2.setCard(blankCard);
+                            card3_2.setCard(blankCard, true);
                             break;
                         case 3:
-                            card3_3.setCard(blankCard);
+                            card3_3.setCard(blankCard, true);
                             break;
                         case 4:
-                            card3_4.setCard(blankCard);
+                            card3_4.setCard(blankCard, true);
                             break;
                     }
                     break;
@@ -164,16 +164,16 @@ namespace SpenderProject
                     switch (index)
                     {
                         case 0:
-                            card1_1.setCard(card);
+                            card1_1.setCard(card, true);
                             break;
                         case 1:
-                            card1_2.setCard(card);
+                            card1_2.setCard(card, true);
                             break;
                         case 2:
-                            card1_3.setCard(card);
+                            card1_3.setCard(card, true);
                             break;
                         case 3:
-                            card1_4.setCard(card);
+                            card1_4.setCard(card, true);
                             break;
                     }
                     break;
@@ -181,16 +181,16 @@ namespace SpenderProject
                     switch (index)
                     {
                         case 0:
-                            card2_1.setCard(card);
+                            card2_1.setCard(card, true);
                             break;
                         case 1:
-                            card2_2.setCard(card);
+                            card2_2.setCard(card, true);
                             break;
                         case 2:
-                            card2_3.setCard(card);
+                            card2_3.setCard(card, true);
                             break;
                         case 3:
-                            card2_4.setCard(card);
+                            card2_4.setCard(card, true);
                             break;
                     }
                     break;
@@ -198,16 +198,16 @@ namespace SpenderProject
                     switch (index)
                     {
                         case 0:
-                            card3_1.setCard(card);
+                            card3_1.setCard(card, true);
                             break;
                         case 1:
-                            card3_2.setCard(card);
+                            card3_2.setCard(card, true);
                             break;
                         case 2:
-                            card3_3.setCard(card);
+                            card3_3.setCard(card, true);
                             break;
                         case 3:
-                            card3_4.setCard(card);
+                            card3_4.setCard(card, true);
                             break;
                     }
                     break;
@@ -257,7 +257,7 @@ namespace SpenderProject
 
                     board.replaceDeck1Card(i);
                     parent.endActivePlayerTurn();
-                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
+                    loadBoard(board, board.NumberOfPlayers);
                     break;
 
                 case 2:
@@ -278,7 +278,7 @@ namespace SpenderProject
 
                     board.replaceDeck2Card(i);
                     parent.endActivePlayerTurn();
-                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
+                    loadBoard(board, board.NumberOfPlayers);
                     break;
 
                 case 3:
@@ -299,7 +299,7 @@ namespace SpenderProject
                     
                     board.replaceDeck3Card(i);
                     parent.endActivePlayerTurn();
-                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
+                    loadBoard(board, board.NumberOfPlayers);
                     break;
             }
 
@@ -449,7 +449,7 @@ namespace SpenderProject
                     board.replaceDeck1Card(i);
                     parent.buyCard(card); //ADD PLAYER BUY CARD
                     parent.endActivePlayerTurn();
-                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
+                    loadBoard(board, board.NumberOfPlayers);
                     break;
 
                 case 2:
@@ -463,7 +463,7 @@ namespace SpenderProject
                     board.replaceDeck2Card(i);
                     parent.buyCard(card); //ADD PLAYER BUY CARD
                     parent.endActivePlayerTurn();
-                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
+                    loadBoard(board, board.NumberOfPlayers);
                     break;
 
                 case 3:
@@ -477,7 +477,7 @@ namespace SpenderProject
                     board.replaceDeck3Card(i);
                     parent.buyCard(card); //ADD PLAYER BUY CARD
                     parent.endActivePlayerTurn();
-                    loadBoard(board, 2); //TODO: REMOVE HARDCODE
+                    loadBoard(board, board.NumberOfPlayers);
                     break;
             }
         }

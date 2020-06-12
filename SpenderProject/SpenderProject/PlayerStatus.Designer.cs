@@ -120,6 +120,17 @@
             this.Player4BlueCoinText = new System.Windows.Forms.Label();
             this.Player4WhiteCoinText = new System.Windows.Forms.Label();
             this.Player4WildCoinText = new System.Windows.Forms.Label();
+            this.Player1Score = new System.Windows.Forms.Label();
+            this.Player2Score = new System.Windows.Forms.Label();
+            this.Player3Score = new System.Windows.Forms.Label();
+            this.Player4Score = new System.Windows.Forms.Label();
+            this.ShowHideButton = new System.Windows.Forms.Button();
+            this.deck3 = new SpenderProject.Deck();
+            this.deck2 = new SpenderProject.Deck();
+            this.deck1 = new SpenderProject.Deck();
+            this.card3 = new SpenderProject.Card();
+            this.card2 = new SpenderProject.Card();
+            this.card1 = new SpenderProject.Card();
             ((System.ComponentModel.ISupportInitialize)(this.Player1Turn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player3Turn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player2Turn)).BeginInit();
@@ -994,11 +1005,123 @@
             this.Player4WildCoinText.TabIndex = 81;
             this.Player4WildCoinText.Text = "label1";
             // 
+            // Player1Score
+            // 
+            this.Player1Score.AutoSize = true;
+            this.Player1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Player1Score.Location = new System.Drawing.Point(243, 13);
+            this.Player1Score.Name = "Player1Score";
+            this.Player1Score.Size = new System.Drawing.Size(86, 31);
+            this.Player1Score.TabIndex = 92;
+            this.Player1Score.Text = "label1";
+            // 
+            // Player2Score
+            // 
+            this.Player2Score.AutoSize = true;
+            this.Player2Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Player2Score.Location = new System.Drawing.Point(987, 13);
+            this.Player2Score.Name = "Player2Score";
+            this.Player2Score.Size = new System.Drawing.Size(86, 31);
+            this.Player2Score.TabIndex = 93;
+            this.Player2Score.Text = "label1";
+            // 
+            // Player3Score
+            // 
+            this.Player3Score.AutoSize = true;
+            this.Player3Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Player3Score.Location = new System.Drawing.Point(243, 76);
+            this.Player3Score.Name = "Player3Score";
+            this.Player3Score.Size = new System.Drawing.Size(86, 31);
+            this.Player3Score.TabIndex = 94;
+            this.Player3Score.Text = "label2";
+            // 
+            // Player4Score
+            // 
+            this.Player4Score.AutoSize = true;
+            this.Player4Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Player4Score.Location = new System.Drawing.Point(987, 76);
+            this.Player4Score.Name = "Player4Score";
+            this.Player4Score.Size = new System.Drawing.Size(86, 31);
+            this.Player4Score.TabIndex = 95;
+            this.Player4Score.Text = "label3";
+            // 
+            // ShowHideButton
+            // 
+            this.ShowHideButton.Location = new System.Drawing.Point(588, 8);
+            this.ShowHideButton.Name = "ShowHideButton";
+            this.ShowHideButton.Size = new System.Drawing.Size(75, 23);
+            this.ShowHideButton.TabIndex = 99;
+            this.ShowHideButton.Text = "button1";
+            this.ShowHideButton.UseVisualStyleBackColor = true;
+            this.ShowHideButton.Click += new System.EventHandler(this.ShowHideButton_Click);
+            // 
+            // deck3
+            // 
+            this.deck3.BackColor = System.Drawing.Color.Transparent;
+            this.deck3.Location = new System.Drawing.Point(690, 38);
+            this.deck3.Name = "deck3";
+            this.deck3.Size = new System.Drawing.Size(115, 160);
+            this.deck3.TabIndex = 102;
+            // 
+            // deck2
+            // 
+            this.deck2.BackColor = System.Drawing.Color.Transparent;
+            this.deck2.Location = new System.Drawing.Point(569, 38);
+            this.deck2.Name = "deck2";
+            this.deck2.Size = new System.Drawing.Size(115, 160);
+            this.deck2.TabIndex = 101;
+            // 
+            // deck1
+            // 
+            this.deck1.BackColor = System.Drawing.Color.Transparent;
+            this.deck1.Location = new System.Drawing.Point(448, 38);
+            this.deck1.Name = "deck1";
+            this.deck1.Size = new System.Drawing.Size(115, 160);
+            this.deck1.TabIndex = 100;
+            // 
+            // card3
+            // 
+            this.card3.BackColor = System.Drawing.Color.Transparent;
+            this.card3.card = null;
+            this.card3.Location = new System.Drawing.Point(690, 38);
+            this.card3.Name = "card3";
+            this.card3.Size = new System.Drawing.Size(115, 160);
+            this.card3.TabIndex = 98;
+            // 
+            // card2
+            // 
+            this.card2.BackColor = System.Drawing.Color.Transparent;
+            this.card2.card = null;
+            this.card2.Location = new System.Drawing.Point(569, 38);
+            this.card2.Name = "card2";
+            this.card2.Size = new System.Drawing.Size(115, 160);
+            this.card2.TabIndex = 97;
+            // 
+            // card1
+            // 
+            this.card1.BackColor = System.Drawing.Color.Transparent;
+            this.card1.card = null;
+            this.card1.Location = new System.Drawing.Point(448, 38);
+            this.card1.Name = "card1";
+            this.card1.Size = new System.Drawing.Size(115, 160);
+            this.card1.TabIndex = 96;
+            // 
             // PlayerStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.deck3);
+            this.Controls.Add(this.deck2);
+            this.Controls.Add(this.deck1);
+            this.Controls.Add(this.ShowHideButton);
+            this.Controls.Add(this.card3);
+            this.Controls.Add(this.card2);
+            this.Controls.Add(this.card1);
+            this.Controls.Add(this.Player4Score);
+            this.Controls.Add(this.Player3Score);
+            this.Controls.Add(this.Player2Score);
+            this.Controls.Add(this.Player1Score);
             this.Controls.Add(this.Player4BlackCardText);
             this.Controls.Add(this.Player4RedCardText);
             this.Controls.Add(this.Player4GreenCardText);
@@ -1092,7 +1215,7 @@
             this.Controls.Add(this.Player3Turn);
             this.Controls.Add(this.Player1Turn);
             this.Name = "PlayerStatus";
-            this.Size = new System.Drawing.Size(1300, 120);
+            this.Size = new System.Drawing.Size(1300, 263);
             ((System.ComponentModel.ISupportInitialize)(this.Player1Turn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player3Turn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player2Turn)).EndInit();
@@ -1240,5 +1363,16 @@
         private System.Windows.Forms.Label Player4BlueCoinText;
         private System.Windows.Forms.Label Player4WhiteCoinText;
         private System.Windows.Forms.Label Player4WildCoinText;
+        private System.Windows.Forms.Label Player1Score;
+        private System.Windows.Forms.Label Player2Score;
+        private System.Windows.Forms.Label Player3Score;
+        private System.Windows.Forms.Label Player4Score;
+        private Card card1;
+        private Card card2;
+        private Card card3;
+        private System.Windows.Forms.Button ShowHideButton;
+        private Deck deck1;
+        private Deck deck2;
+        private Deck deck3;
     }
 }

@@ -351,10 +351,7 @@ namespace SpenderProject.Resources.Images
                 selectedCoins.RemoveAt(0);
                 resetSelection();
 
-                if(selectedCoins.Count == 0)
-                {
-                    CancelConfirmVisibility(false);
-                }
+                CancelConfirmVisibility(false);
 
                 LoadBoard(coinSelectionBoard);
 
@@ -368,6 +365,16 @@ namespace SpenderProject.Resources.Images
                 coinSelectionBoard.addCoin(selectedCoins[1]);
                 selectedCoins.RemoveAt(1);
                 resetSelection();
+
+                if(selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1])
+                {
+                    CancelConfirmVisibility(true);
+                }
+                else
+                {
+                    CancelConfirmVisibility(false);
+                }
+
                 LoadBoard(coinSelectionBoard);
 
             }
@@ -380,6 +387,16 @@ namespace SpenderProject.Resources.Images
                 coinSelectionBoard.addCoin(selectedCoins[2]);
                 selectedCoins.RemoveAt(2);
                 resetSelection();
+
+                if (selectedCoins.Count == 2 && selectedCoins[0] == selectedCoins[1])
+                {
+                    CancelConfirmVisibility(true);
+                }
+                else
+                {
+                    CancelConfirmVisibility(false);
+                }
+
                 LoadBoard(coinSelectionBoard);
             }
         }

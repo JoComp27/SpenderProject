@@ -15,7 +15,9 @@ namespace SpenderProject
 
         public Models.Card card { get; set; }
         Shop parentForm;
+        PlayerStatus playerStatusParent;
         bool firstTime = true;
+        bool ShopCard;
 
         public Card()
         {
@@ -24,14 +26,24 @@ namespace SpenderProject
             holdButton.Visible = false;
         }
 
-        public void setCard(Models.Card card)
+        public void setCard(Models.Card card, bool shopCard)
         {
+
+            this.ShopCard = shopCard;
 
             if (firstTime)
             {
                 firstTime = false;
 
-                parentForm = (this.Parent as Shop);
+                if (shopCard)
+                {
+                    parentForm = (this.Parent as Shop);
+                }
+                else
+                {
+                    playerStatusParent = (this.Parent as PlayerStatus);
+                }
+                
 
                 this.BackgroundImage = (Image)ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getBackgroundPath(card)), this.Width, this.Height);
                 ColorImage.Image = (Image)ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getGemDirectory(card)), ColorImage.Width, ColorImage.Height);
@@ -278,10 +290,15 @@ namespace SpenderProject
 
         private void backgroundPicture_mouseEntered(object sender, MouseEventArgs e)
         {
-            Console.WriteLine(card.ToString());
-            Console.WriteLine("CARD");
             showButtons(true);
-            parentForm.CheckBuyHold(card);
+            if (ShopCard)
+            {
+                parentForm.CheckBuyHold(card);
+            }
+            else
+            {
+                playerStatusParent.CheckBuy(card);
+            }
         }
 
 

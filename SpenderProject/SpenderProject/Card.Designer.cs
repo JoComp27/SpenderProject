@@ -103,6 +103,7 @@
             // Score
             // 
             this.Score.AutoSize = true;
+            this.Score.BackColor = System.Drawing.Color.White;
             this.Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Score.Location = new System.Drawing.Point(7, 8);
             this.Score.Name = "Score";
@@ -121,6 +122,7 @@
             // ReqNum4
             // 
             this.ReqNum4.AutoSize = true;
+            this.ReqNum4.BackColor = System.Drawing.Color.White;
             this.ReqNum4.Location = new System.Drawing.Point(10, 42);
             this.ReqNum4.Name = "ReqNum4";
             this.ReqNum4.Size = new System.Drawing.Size(35, 13);
@@ -130,6 +132,7 @@
             // ReqNum3
             // 
             this.ReqNum3.AutoSize = true;
+            this.ReqNum3.BackColor = System.Drawing.Color.White;
             this.ReqNum3.Location = new System.Drawing.Point(10, 73);
             this.ReqNum3.Name = "ReqNum3";
             this.ReqNum3.Size = new System.Drawing.Size(35, 13);
@@ -139,6 +142,7 @@
             // ReqNum2
             // 
             this.ReqNum2.AutoSize = true;
+            this.ReqNum2.BackColor = System.Drawing.Color.White;
             this.ReqNum2.Location = new System.Drawing.Point(10, 104);
             this.ReqNum2.Name = "ReqNum2";
             this.ReqNum2.Size = new System.Drawing.Size(35, 13);
@@ -148,6 +152,7 @@
             // ReqNum1
             // 
             this.ReqNum1.AutoSize = true;
+            this.ReqNum1.BackColor = System.Drawing.Color.White;
             this.ReqNum1.Location = new System.Drawing.Point(10, 134);
             this.ReqNum1.Name = "ReqNum1";
             this.ReqNum1.Size = new System.Drawing.Size(35, 13);

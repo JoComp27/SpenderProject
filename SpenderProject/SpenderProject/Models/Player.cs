@@ -90,12 +90,32 @@ namespace SpenderProject.Models
 
                     if (WhiteCoins >= removedAmount)
                     {
-                        WhiteCoins = ((removedAmount > 0) ? WhiteCoins - removedAmount : WhiteCoins);
+                        if(removedAmount > 0)
+                        {
+                            WhiteCoins -= removedAmount;
+
+                            for(int i = 0; i < removedAmount; i++)
+                            {
+                                colors.Add(Models.Colors.White);
+                            }
+
+                        }
                     }
                     else
                     {
                         int diff = removedAmount - WhiteCoins;
                         WildCoins -= diff;
+
+                        for(int i = 0; i < diff; i++)
+                        {
+                            colors.Add(Models.Colors.Wild);
+                        }
+
+                        for(int i = 0; i < WhiteCoins; i++)
+                        {
+                            colors.Add(Models.Colors.White);
+                        }
+
                         WhiteCoins = 0;
                     }
                     
@@ -107,12 +127,30 @@ namespace SpenderProject.Models
 
                     if (BlackCoins >= removedAmount)
                     {
-                        BlackCoins = ((removedAmount > 0) ? BlackCoins - removedAmount : BlackCoins);
+                        if(removedAmount > 0)
+                        {
+                            BlackCoins -= removedAmount;
+                            for (int i = 0; i < removedAmount; i++)
+                            {
+                                colors.Add(Models.Colors.Black);
+                            }
+                        }
                     }
                     else
                     {
                         int diff = removedAmount - BlackCoins;
                         WildCoins -= diff;
+
+                        for (int i = 0; i < diff; i++)
+                        {
+                            colors.Add(Models.Colors.Wild);
+                        }
+
+                        for (int i = 0; i < WhiteCoins; i++)
+                        {
+                            colors.Add(Models.Colors.White);
+                        }
+
                         BlackCoins = 0;
                     }
 
@@ -124,12 +162,31 @@ namespace SpenderProject.Models
 
                     if (RedCoins >= removedAmount)
                     {
+                        if(removedAmount > 0)
+                        {
+                            RedCoins -= removedAmount;
+                            for(int i = 0; i < removedAmount; i++)
+                            {
+                                colors.Add(Models.Colors.Red);
+                            }
+                        }
                         RedCoins = ((removedAmount > 0) ? RedCoins - removedAmount : RedCoins);
                     }
                     else
                     {
                         int diff = removedAmount - RedCoins;
                         WildCoins -= diff;
+
+                        for (int i = 0; i < diff; i++)
+                        {
+                            colors.Add(Models.Colors.Wild);
+                        }
+
+                        for (int i = 0; i < RedCoins; i++)
+                        {
+                            colors.Add(Models.Colors.Red);
+                        }
+
                         RedCoins = 0;
                     }
 
@@ -141,12 +198,30 @@ namespace SpenderProject.Models
 
                     if (BlueCoins >= removedAmount)
                     {
-                        BlueCoins = ((removedAmount > 0) ? BlueCoins - removedAmount : BlueCoins);
+                        if(removedAmount > 0)
+                        {
+                            BlueCoins -= removedAmount;
+                            for (int i = 0; i < removedAmount; i++)
+                            {
+                                colors.Add(Models.Colors.Blue);
+                            }
+                        }
                     }
                     else
                     {
                         int diff = removedAmount - BlueCoins;
                         WildCoins -= diff;
+
+                        for (int i = 0; i < diff; i++)
+                        {
+                            colors.Add(Models.Colors.Wild);
+                        }
+
+                        for (int i = 0; i < BlueCoins; i++)
+                        {
+                            colors.Add(Models.Colors.Blue);
+                        }
+
                         BlueCoins = 0;
                     }
 
@@ -157,12 +232,30 @@ namespace SpenderProject.Models
 
                     if (GreenCoins >= removedAmount)
                     {
-                        GreenCoins = ((removedAmount > 0) ? GreenCoins - removedAmount : GreenCoins);
+                        if(removedAmount > 0)
+                        {
+                            GreenCards -= removedAmount;
+                            for (int i = 0; i < removedAmount; i++)
+                            {
+                                colors.Add(Models.Colors.Green);
+                            }
+                        }
                     }
                     else
                     {
                         int diff = removedAmount - GreenCoins;
                         WildCoins -= diff;
+
+                        for (int i = 0; i < diff; i++)
+                        {
+                            colors.Add(Models.Colors.Wild);
+                        }
+
+                        for (int i = 0; i < GreenCoins; i++)
+                        {
+                            colors.Add(Models.Colors.Green);
+                        }
+
                         GreenCoins = 0;
                     }
 

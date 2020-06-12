@@ -13,8 +13,10 @@ namespace SpenderProject
 {
     public partial class PlayerStatus : UserControl
     {
-
+        Models.Game game;
         bool firstTime = true;
+        bool showHide = false;
+
         public PlayerStatus()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace SpenderProject
             Player1GreenCoinText.Text = "";
             Player1RedCardText.Text = "";
             Player1RedCoinText.Text = "";
+            Player1Score.Text = "";
 
             Player2BlackCardText.Text = "";
             Player2BlackCoinText.Text = "";
@@ -42,6 +45,7 @@ namespace SpenderProject
             Player2GreenCoinText.Text = "";
             Player2RedCardText.Text = "";
             Player2RedCoinText.Text = "";
+            Player2Score.Text = "";
 
             Player3BlackCardText.Text = "";
             Player3BlackCoinText.Text = "";
@@ -54,6 +58,7 @@ namespace SpenderProject
             Player3GreenCoinText.Text = "";
             Player3RedCardText.Text = "";
             Player3RedCoinText.Text = "";
+            Player3Score.Text = "";
 
             Player4BlackCardText.Text = "";
             Player4BlackCoinText.Text = "";
@@ -66,11 +71,20 @@ namespace SpenderProject
             Player4GreenCoinText.Text = "";
             Player4RedCardText.Text = "";
             Player4RedCoinText.Text = "";
+            Player4Score.Text = "";
+
+            deck1.setText("");
+            deck2.setText("");
+            deck3.setText("");
+
+            ShowHideButton.Text = "Show";
 
         }
 
         public void loadGame(Models.Game game)
         {
+
+            this.game = game;
 
             //Assumption that 2 players is minimum
 
@@ -138,6 +152,7 @@ namespace SpenderProject
             Player1GreenCoinText.Text = game.players[0].GreenCoins.ToString();
             Player1RedCardText.Text = game.players[0].RedCards.ToString();
             Player1RedCoinText.Text = game.players[0].RedCoins.ToString();
+            Player1Score.Text = game.players[0].Score.ToString();
 
             
 
@@ -152,6 +167,7 @@ namespace SpenderProject
             Player2GreenCoinText.Text = game.players[1].GreenCoins.ToString();
             Player2RedCardText.Text = game.players[1].RedCards.ToString();
             Player2RedCoinText.Text = game.players[1].RedCoins.ToString();
+            Player2Score.Text = game.players[1].Score.ToString();
 
             if (firstTime)
             {
@@ -195,6 +211,7 @@ namespace SpenderProject
                 Player3GreenCoinText.Text = game.players[2].GreenCoins.ToString();
                 Player3RedCardText.Text = game.players[2].RedCards.ToString();
                 Player3RedCoinText.Text = game.players[2].RedCoins.ToString();
+                Player3Score.Text = game.players[2].Score.ToString();
 
                 if (firstTime)
                 {
@@ -225,6 +242,7 @@ namespace SpenderProject
                     Player4GreenCoinText.Text = game.players[3].GreenCoins.ToString();
                     Player4RedCardText.Text = game.players[3].RedCards.ToString();
                     Player4RedCoinText.Text = game.players[3].RedCoins.ToString();
+                    Player4Score.Text = game.players[3].Score.ToString();
 
                     if (firstTime)
                     {
@@ -244,7 +262,129 @@ namespace SpenderProject
                 }
             }
 
+            resetHeldCards();
+
             firstTime = false;
+
+        }
+
+        public void resetHeldCards()
+        {
+
+            switch (this.game.players[this.game.ActivePlayer].HeldCards.Count)
+            {
+                case 0:
+                    deck1.Visible = false;
+                    deck2.Visible = false;
+                    deck3.Visible = false;
+                    card1.Visible = false;
+                    card2.Visible = false;
+                    card3.Visible = false;
+                    break;
+                case 1:
+                    deck1.setLevel(game.players[this.game.ActivePlayer].HeldCards[0].Level);
+                    card1.setCard(game.players[this.game.ActivePlayer].HeldCards[0], false);
+
+                    deck1.Visible = !showHide;
+                    deck2.Visible = false;
+                    deck3.Visible = false;
+                    card1.Visible = showHide;
+                    card2.Visible = false;
+                    card3.Visible = false;
+
+                    card1.enableHoldButton(false);
+
+                    break;
+                case 2:
+                    deck1.setLevel(game.players[this.game.ActivePlayer].HeldCards[0].Level);
+                    card1.setCard(game.players[this.game.ActivePlayer].HeldCards[0], false);
+
+                    deck2.setLevel(game.players[this.game.ActivePlayer].HeldCards[1].Level);
+                    card2.setCard(game.players[this.game.ActivePlayer].HeldCards[1], false);
+
+                    deck1.Visible = !showHide;
+                    deck2.Visible = !showHide;
+                    deck3.Visible = false;
+                    card1.Visible = showHide;
+                    card2.Visible = showHide;
+                    card3.Visible = false;
+
+                    card1.enableHoldButton(false);
+                    card2.enableHoldButton(false);
+
+                    break;
+                case 3:
+                    deck1.setLevel(game.players[this.game.ActivePlayer].HeldCards[0].Level);
+                    card1.setCard(game.players[this.game.ActivePlayer].HeldCards[0], false);
+
+                    deck2.setLevel(game.players[this.game.ActivePlayer].HeldCards[1].Level);
+                    card2.setCard(game.players[this.game.ActivePlayer].HeldCards[1], false);
+
+                    deck3.setLevel(game.players[this.game.ActivePlayer].HeldCards[2].Level);
+                    card3.setCard(game.players[this.game.ActivePlayer].HeldCards[2], false);
+
+                    deck1.Visible = !showHide;
+                    deck2.Visible = !showHide;
+                    deck3.Visible = !showHide;
+                    card1.Visible = showHide;
+                    card2.Visible = showHide;
+                    card3.Visible = showHide;
+
+                    card1.enableHoldButton(false);
+                    card2.enableHoldButton(false);
+                    card3.enableHoldButton(false);
+
+                    break;
+            }
+        }
+
+        public void hideHelds()
+        {
+            ShowHideButton.Text = "Show";
+            showHide = false;
+            resetHeldCards();
+        }
+
+        private void changeButtonText()
+        {
+            if (showHide)
+            {
+                ShowHideButton.Text = "Show";
+                showHide = false;
+                resetHeldCards();
+            }
+            else
+            {
+                ShowHideButton.Text = "Hide";
+                showHide = true;
+                resetHeldCards();
+            }
+        }
+
+        private void ShowHideButton_Click(object sender, EventArgs e)
+        {
+            changeButtonText();
+        }
+
+        internal void CheckBuy(Models.Card card)
+        {
+            buySet(card, game.players[game.ActivePlayer].IsCardBuyable(card));
+        }
+
+        public void buySet(Models.Card card, bool buy)
+        {
+            if (card.Equals(card1.card))
+            {
+                card1.enableBuyButton(buy);
+            }
+            else if (card.Equals(card2.card))
+            {
+                card2.enableBuyButton(buy);
+            }
+            else if (card.Equals(card3.card))
+            {
+                card3.enableBuyButton(buy);
+            }
 
         }
 

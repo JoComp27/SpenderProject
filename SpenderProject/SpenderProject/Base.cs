@@ -49,7 +49,7 @@ namespace SpenderProject
         {
 
             coins1.addCoins(game.currentPlayerBuysCard(card));
-
+            
             playerStatus1.loadGame(game);
         }
 
@@ -79,6 +79,7 @@ namespace SpenderProject
         internal void endActivePlayerTurn()
         {
             game.endCurrentTurn();
+            playerStatus1.hideHelds();
             playerStatus1.loadGame(game);
             //TODO: Trigger Player UI to change Active visual
         }

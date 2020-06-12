@@ -27,5 +27,10 @@ namespace SpenderProject
         {
             label1.Text = number.ToString();
         }
+
+        public void setText(string value)
+        {
+            label1.Text = value;
+        }
     }
 }
