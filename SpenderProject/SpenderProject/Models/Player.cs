@@ -170,7 +170,6 @@ namespace SpenderProject.Models
                                 colors.Add(Models.Colors.Red);
                             }
                         }
-                        RedCoins = ((removedAmount > 0) ? RedCoins - removedAmount : RedCoins);
                     }
                     else
                     {
@@ -234,7 +233,7 @@ namespace SpenderProject.Models
                     {
                         if(removedAmount > 0)
                         {
-                            GreenCards -= removedAmount;
+                            GreenCoins -= removedAmount;
                             for (int i = 0; i < removedAmount; i++)
                             {
                                 colors.Add(Models.Colors.Green);
@@ -287,9 +286,45 @@ namespace SpenderProject.Models
             else
             {
 
-                //TODO: ADD VISUAL INDICATOR FOR ILLEGAL BUY
+                //ADD VISUAL INDICATOR FOR ILLEGAL BUY
                 Console.WriteLine("PLAYER IS ATTEMPTING TO BUY A CARD, ILLEGAL MOVE");
                 return new List<Models.Colors>();
+            }
+        }
+
+        internal bool isNobleBuyable(Noble noble)
+        {
+            bool black = BlackCards >= noble.BlackRequirement;
+            bool blue = BlueCards >= noble.BlueRequirement;
+            bool red = RedCards >= noble.RedRequirement;
+            bool green = GreenCards >= noble.GreenRequirement;
+            bool white = WhiteCards >= noble.WhiteRequirement;
+
+            return black && blue && red && green && white;
+        }
+
+        internal void AddCoin(Colors colors)
+        {
+            switch (colors)
+            {
+                case Models.Colors.Black:
+                    BlackCoins++;
+                    break;
+                case Models.Colors.Blue:
+                    BlueCoins++;
+                    break;
+                case Models.Colors.Green:
+                    GreenCoins++;
+                    break;
+                case Models.Colors.Red:
+                    RedCoins++;
+                    break;
+                case Models.Colors.White:
+                    WhiteCoins++;
+                    break;
+                case Models.Colors.Wild:
+                    WildCoins++;
+                    break;
             }
         }
 
@@ -353,19 +388,19 @@ namespace SpenderProject.Models
 
         public bool isCardHoldable(Models.Card card)
         {
-            return HeldCards.Count < 4;
+            return HeldCards.Count < 3;
         }
 
         public void holdCard(Card card)
         {
             if(HeldCards.Count < 4)
             {
-                WildCoins++; //TODO: FIX THIS TO REMOVE COINS FROM BOARD
+                WildCoins++;
                 HeldCards.Add(card);
             }
             else
             {
-                //TODO: ADD VISUAL INDICATOR FOR ILLEGAL HOLD
+                //ADD VISUAL INDICATOR FOR ILLEGAL HOLD
                 Console.WriteLine("PLAYER IS ATTEMPTING TO HOLD A CARD, ILLEGAL MOVE");
             }
         }
@@ -381,7 +416,6 @@ namespace SpenderProject.Models
             }
             else
             {
-                //TODO: ADD VISUAL INDICATOR FOR ILLEGAL BUYING HELD CARD
                 Console.WriteLine("PLAYER IS ATTEMPTING TO BUY A HELD CARD, ILLEGAL MOVE");
             }
 
@@ -389,7 +423,7 @@ namespace SpenderProject.Models
 
         public bool CheckCoinCount()
         {
-            return GetSumOfCoins() < 10;
+            return GetSumOfCoins() <= 10;
         }
 
         public void AddCoins(int white, int black, int red, int blue, int green, int wild)
@@ -401,7 +435,6 @@ namespace SpenderProject.Models
             GreenCoins += green;
             WildCoins += wild;
 
-            CheckCoinCount(); //TODO: ADD REMOVING COINS PART FROM HERE
         }
 
         public void RemoveCoins(int white, int black, int red, int blue, int green, int wild)
@@ -414,7 +447,36 @@ namespace SpenderProject.Models
             WildCoins -= wild;
         }
 
-        private int GetSumOfCoins()
+        public void RemoveCoins(List<Models.Colors> colors)
+        {
+            foreach(Models.Colors color in colors)
+            {
+                switch (color)
+                {
+                    case Models.Colors.Black:
+                        BlackCoins--;
+                        break;
+                    case Models.Colors.Blue:
+                        BlueCoins--;
+                        break;
+                    case Models.Colors.Green:
+                        GreenCoins--;
+                        break;
+                    case Models.Colors.Red:
+                        RedCoins--;
+                        break;
+                    case Models.Colors.White:
+                        WhiteCoins--;
+                        break;
+                    case Models.Colors.Wild:
+                        WildCoins--;
+                        break;
+
+                }
+            }
+        }
+
+        public int GetSumOfCoins()
         {
             return WhiteCoins + BlueCoins + GreenCoins + RedCoins + BlackCoins + WildCoins;
         }

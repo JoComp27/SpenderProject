@@ -52,6 +52,12 @@
     <Compile Include="Card.Designer.cs">
       <DependentUpon>Card.cs</DependentUpon>
     </Compile>
+    <Compile Include="CoinRemover.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CoinRemover.Designer.cs">
+      <DependentUpon>CoinRemover.cs</DependentUpon>
+    </Compile>
     <Compile Include="Deck.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="Tools\ImageResizer.cs" />
     <EmbeddedResource Include="Card.resx">
       <DependentUpon>Card.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CoinRemover.resx">
+      <DependentUpon>CoinRemover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Deck.resx">
       <DependentUpon>Deck.cs</DependentUpon>

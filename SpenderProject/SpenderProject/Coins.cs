@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpenderProject.Tools;
 using SpenderProject.Models;
+using System.Runtime.InteropServices;
 
 namespace SpenderProject.Resources.Images
 {
@@ -57,7 +58,7 @@ namespace SpenderProject.Resources.Images
 
                 selectedCoins = new List<Models.Colors>();
 
-                this.board = board;
+                this.board = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
                 this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
 
                 CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
@@ -85,12 +86,14 @@ namespace SpenderProject.Resources.Images
         internal void removeCoin(Models.Colors color)
         {
             board.removeCoin(color);
+            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
             LoadBoard(board);
         }
 
         internal void addCoin(Models.Colors color)
         {
             board.addCoin(color);
+            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
             LoadBoard(board);
         }
 
@@ -420,7 +423,7 @@ namespace SpenderProject.Resources.Images
             selectedCoins.Clear();
             resetSelection();
 
-            board.setCoins(coinSelectionBoard.WhiteCoins, coinSelectionBoard.BlackCoins, coinSelectionBoard.RedCoins, 
+            board.setCoins(coinSelectionBoard.WhiteCoins, coinSelectionBoard.BlueCoins, coinSelectionBoard.RedCoins, 
                 coinSelectionBoard.BlackCoins, coinSelectionBoard.GreenCoins, coinSelectionBoard.WildCoins);
 
             CancelConfirmVisibility(false);

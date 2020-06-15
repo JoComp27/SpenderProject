@@ -131,6 +131,8 @@
             this.card3 = new SpenderProject.Card();
             this.card2 = new SpenderProject.Card();
             this.card1 = new SpenderProject.Card();
+            this.coinRemover1 = new SpenderProject.CoinRemover();
+            this.coinRemover2 = new SpenderProject.CoinRemover();
             ((System.ComponentModel.ISupportInitialize)(this.Player1Turn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player3Turn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player2Turn)).BeginInit();
@@ -1008,6 +1010,7 @@
             // Player1Score
             // 
             this.Player1Score.AutoSize = true;
+            this.Player1Score.BackColor = System.Drawing.Color.White;
             this.Player1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Player1Score.Location = new System.Drawing.Point(243, 13);
             this.Player1Score.Name = "Player1Score";
@@ -1018,6 +1021,7 @@
             // Player2Score
             // 
             this.Player2Score.AutoSize = true;
+            this.Player2Score.BackColor = System.Drawing.Color.White;
             this.Player2Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Player2Score.Location = new System.Drawing.Point(987, 13);
             this.Player2Score.Name = "Player2Score";
@@ -1028,6 +1032,7 @@
             // Player3Score
             // 
             this.Player3Score.AutoSize = true;
+            this.Player3Score.BackColor = System.Drawing.Color.White;
             this.Player3Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Player3Score.Location = new System.Drawing.Point(243, 76);
             this.Player3Score.Name = "Player3Score";
@@ -1038,6 +1043,7 @@
             // Player4Score
             // 
             this.Player4Score.AutoSize = true;
+            this.Player4Score.BackColor = System.Drawing.Color.White;
             this.Player4Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Player4Score.Location = new System.Drawing.Point(987, 76);
             this.Player4Score.Name = "Player4Score";
@@ -1106,11 +1112,27 @@
             this.card1.Size = new System.Drawing.Size(115, 160);
             this.card1.TabIndex = 96;
             // 
+            // coinRemover1
+            // 
+            this.coinRemover1.Location = new System.Drawing.Point(4, 133);
+            this.coinRemover1.Name = "coinRemover1";
+            this.coinRemover1.Size = new System.Drawing.Size(300, 145);
+            this.coinRemover1.TabIndex = 103;
+            // 
+            // coinRemover2
+            // 
+            this.coinRemover2.Location = new System.Drawing.Point(993, 133);
+            this.coinRemover2.Name = "coinRemover2";
+            this.coinRemover2.Size = new System.Drawing.Size(300, 130);
+            this.coinRemover2.TabIndex = 104;
+            // 
             // PlayerStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.coinRemover2);
+            this.Controls.Add(this.coinRemover1);
             this.Controls.Add(this.deck3);
             this.Controls.Add(this.deck2);
             this.Controls.Add(this.deck1);
@@ -1215,7 +1237,7 @@
             this.Controls.Add(this.Player3Turn);
             this.Controls.Add(this.Player1Turn);
             this.Name = "PlayerStatus";
-            this.Size = new System.Drawing.Size(1300, 263);
+            this.Size = new System.Drawing.Size(1300, 285);
             ((System.ComponentModel.ISupportInitialize)(this.Player1Turn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player3Turn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player2Turn)).EndInit();
@@ -1374,5 +1396,7 @@
         private Deck deck1;
         private Deck deck2;
         private Deck deck3;
+        private CoinRemover coinRemover1;
+        private CoinRemover coinRemover2;
     }
 }

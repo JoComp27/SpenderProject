@@ -16,6 +16,8 @@ namespace SpenderProject.Models
 
         public int numberOfPlayers;
 
+        public int firstWinner = -1;
+
         public Game(string gameTitle, int numberOfPlayers)
         {
             this.gameTitle = gameTitle;
@@ -95,6 +97,43 @@ namespace SpenderProject.Models
             }
 
             players[ActivePlayer].AddCoins(white, black, red, blue, green, wild);
+
+        }
+
+
+
+        internal int GameIsDone()
+        {
+            if(firstWinner == -1)
+            {
+                for (int i = 0; i < players.Count; i++)
+                {
+                    if (players[i].Score >= 15)
+                    {
+                        firstWinner = i;
+                    }
+                }
+            }
+
+            if(firstWinner != -1 && ActivePlayer == players.Count - 1)
+            {
+
+                int max = players[firstWinner].Score;
+                int maxIndex = firstWinner;
+
+                for (int i = 0; i < players.Count; i++)
+                {
+                    if (players[firstWinner].Score < players[i].Score)
+                    {
+                        max = players[i].Score;
+                        maxIndex = i;
+                    }
+                }
+
+                return maxIndex;
+            }
+
+            return -1; ;
 
         }
 

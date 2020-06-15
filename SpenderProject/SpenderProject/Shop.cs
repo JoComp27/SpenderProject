@@ -15,7 +15,7 @@ namespace SpenderProject
     {
 
         Base parent;
-        Models.Board board;
+        public Models.Board board { get; set; }
         bool firstTime = true;
 
         public Shop()
@@ -93,6 +93,27 @@ namespace SpenderProject
             deck2.setNumber(board.Deck2.Count);
             deck3.setNumber(board.Deck3.Count);
 
+        }
+
+
+        internal int CheckNobles(Models.Player player)
+        {
+            for (int i = 0; i < board.DisplayNoble.Count; i++)
+            {
+                if (player.isNobleBuyable(board.DisplayNoble[i]))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+
+        }
+
+        internal void removeNoble(int nobleIndex)
+        {
+            board.DeckNoble.RemoveAt(nobleIndex);
+            loadBoard(board, board.NumberOfPlayers);
         }
 
         public void removeCard(int level, int index)
@@ -250,10 +271,10 @@ namespace SpenderProject
                     removeCard(cardLevel, i);
                     parent.HoldCard(card);  //ADD PLAYER HOLD CARD
 
-                    while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
+                    /*while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
                     {
                         Thread.Sleep(1000);
-                    }
+                    }*/
 
                     board.replaceDeck1Card(i);
                     parent.endActivePlayerTurn();
@@ -271,10 +292,10 @@ namespace SpenderProject
                     removeCard(cardLevel, i);
                     parent.HoldCard(card);//ADD PLAYER HOLD CARD
 
-                    while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
+                    /*while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
                     {
                         Thread.Sleep(1000);
-                    }
+                    }*/
 
                     board.replaceDeck2Card(i);
                     parent.endActivePlayerTurn();
@@ -292,10 +313,10 @@ namespace SpenderProject
                     removeCard(cardLevel, i);
                     parent.HoldCard(card);//ADD PLAYER HOLD CARD
 
-                    while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
+                    /*while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
                     {
                         Thread.Sleep(1000);
-                    }
+                    }*/
                     
                     board.replaceDeck3Card(i);
                     parent.endActivePlayerTurn();

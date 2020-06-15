@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpenderProject.Tools;
+using SpenderProject.Models;
 
 namespace SpenderProject
 {
@@ -16,6 +17,8 @@ namespace SpenderProject
         Models.Game game;
         bool firstTime = true;
         bool showHide = false;
+
+        Base parent;
 
         public PlayerStatus()
         {
@@ -81,9 +84,28 @@ namespace SpenderProject
 
         }
 
+        internal void CheckPlayerCoinCount()
+        {
+            if (!game.players[game.ActivePlayer].CheckCoinCount())
+            {
+                parent.lockUI();
+                if(game.ActivePlayer == 2 || game.ActivePlayer == 0)
+                {
+                    coinRemover1.loadPlayer(game.players[game.ActivePlayer], false);
+                }
+                else
+                {
+                    coinRemover2.loadPlayer(game.players[game.ActivePlayer], false);
+                }
+
+                parent.unlockUI();
+
+            }
+        }
+
         public void loadGame(Models.Game game)
         {
-
+            this.parent = (this.Parent as Base);
             this.game = game;
 
             //Assumption that 2 players is minimum
@@ -266,6 +288,11 @@ namespace SpenderProject
 
             firstTime = false;
 
+        }
+
+        internal void removeExcessCoins(List<Colors> colors)
+        {
+            this.parent.removeExcessCoins(colors);
         }
 
         public void resetHeldCards()

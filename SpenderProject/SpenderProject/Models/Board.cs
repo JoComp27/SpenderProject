@@ -227,37 +227,25 @@ namespace SpenderProject.Models
         {
             Display1[index] = Deck1[0];
             Deck1.RemoveAt(0);
-
-            refreshVisuals();
         }
 
         public void replaceDeck2Card(int index)
         {
             Display2[index] = Deck2[0];
             Deck2.RemoveAt(0);
-
-            refreshVisuals();
         }
 
         public void replaceDeck3Card(int index)
         {
             Display3[index] = Deck3[0];
             Deck3.RemoveAt(0);
-
-            refreshVisuals();
         }
 
         public void removeNoble(int index)
         {
             DisplayNoble.RemoveAt(index);
-
-            refreshVisuals();
         }
 
-        public void refreshVisuals()
-        {
-            //TODO: SEE IF VISUALS CAN BE REFRESHED FROM LOGIC SIDE
-        }
 
         public void removeCoin(Models.Colors color)
         {
@@ -288,22 +276,22 @@ namespace SpenderProject.Models
         {
             switch (color)
             {
-                case Colors.White:
+                case Models.Colors.White:
                     WhiteCoins++;
                     break;
-                case Colors.Black:
+                case Models.Colors.Black:
                     BlackCoins++;
                     break;
-                case Colors.Blue:
+                case Models.Colors.Blue:
                     BlueCoins++;
                     break;
-                case Colors.Green:
+                case Models.Colors.Green:
                     GreenCoins++;
                     break;
-                case Colors.Red:
+                case Models.Colors.Red:
                     RedCoins++;
                     break;
-                case Colors.Wild:
+                case Models.Colors.Wild:
                     WildCoins++;
                     break;
             }
