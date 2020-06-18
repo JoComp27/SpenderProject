@@ -247,7 +247,7 @@ namespace SpenderProject.Models
         }
 
 
-        public void removeCoin(Models.Colors color)
+        public void removeCoin(Colors color)
         {
             switch (color)
             {
@@ -272,26 +272,26 @@ namespace SpenderProject.Models
             }
         }
 
-        public void addCoin(Models.Colors color)
+        public void addCoin(Colors color)
         {
             switch (color)
             {
-                case Models.Colors.White:
+                case Colors.White:
                     WhiteCoins++;
                     break;
-                case Models.Colors.Black:
+                case Colors.Black:
                     BlackCoins++;
                     break;
-                case Models.Colors.Blue:
+                case Colors.Blue:
                     BlueCoins++;
                     break;
-                case Models.Colors.Green:
+                case Colors.Green:
                     GreenCoins++;
                     break;
-                case Models.Colors.Red:
+                case Colors.Red:
                     RedCoins++;
                     break;
-                case Models.Colors.Wild:
+                case Colors.Wild:
                     WildCoins++;
                     break;
             }

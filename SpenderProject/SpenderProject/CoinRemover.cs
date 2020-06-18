@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpenderProject.Tools;
+using SpenderProject.Models;
 
 namespace SpenderProject
 {
     public partial class CoinRemover : UserControl
     {
 
-        public Models.Player player;
-        public List<Models.Colors> colors;
+        public Player player;
+        public List<Colors> colors;
         PlayerStatus parent;
 
         bool FirstTime = true;
@@ -35,7 +36,7 @@ namespace SpenderProject
 
         }
 
-        public void loadPlayer(Models.Player player, bool inside)
+        public void loadPlayer(Player player, bool inside)
         {
 
             if (FirstTime)
@@ -43,11 +44,11 @@ namespace SpenderProject
                 FirstTime = false;
                 parent = (this.Parent as PlayerStatus);
 
-                WhiteCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.White)), WhiteCoin.Width, WhiteCoin.Height);
-                BlueCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blue)), BlueCoin.Width, BlueCoin.Height);
-                GreenCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Green)), GreenCoin.Width, GreenCoin.Height);
-                RedCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Red)), RedCoin.Width, RedCoin.Height);
-                BlackCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Black)), BlackCoin.Width, BlackCoin.Height);
+                WhiteCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.White)), WhiteCoin.Width, WhiteCoin.Height);
+                BlueCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blue)), BlueCoin.Width, BlueCoin.Height);
+                GreenCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Green)), GreenCoin.Width, GreenCoin.Height);
+                RedCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Red)), RedCoin.Width, RedCoin.Height);
+                BlackCoin.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Black)), BlackCoin.Width, BlackCoin.Height);
 
                 ConfirmButton.Text = "Confirm";
             
@@ -68,7 +69,7 @@ namespace SpenderProject
 
             if (!inside)
             {
-                colors = new List<Models.Colors>();
+                colors = new List<Colors>();
             }
 
         }
@@ -78,19 +79,19 @@ namespace SpenderProject
             switch (colors.Count)
             {
                 case 0:
-                    Selection1Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Selection1Image.Width,Selection1Image.Height);
-                    Selection2Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Selection2Image.Width, Selection2Image.Height);
-                    Selection3Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Selection3Image.Width, Selection3Image.Height);
+                    Selection1Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Selection1Image.Width,Selection1Image.Height);
+                    Selection2Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Selection2Image.Width, Selection2Image.Height);
+                    Selection3Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Selection3Image.Width, Selection3Image.Height);
                     break;
                 case 1:
                     Selection1Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(colors[0])), Selection1Image.Width, Selection1Image.Height);
-                    Selection2Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Selection2Image.Width, Selection2Image.Height);
-                    Selection3Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Selection3Image.Width, Selection3Image.Height);
+                    Selection2Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Selection2Image.Width, Selection2Image.Height);
+                    Selection3Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Selection3Image.Width, Selection3Image.Height);
                     break;
                 case 2:
                     Selection1Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(colors[0])), Selection1Image.Width, Selection1Image.Height);
                     Selection2Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(colors[1])), Selection2Image.Width, Selection2Image.Height);
-                    Selection3Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Selection3Image.Width, Selection3Image.Height);
+                    Selection3Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Selection3Image.Width, Selection3Image.Height);
                     break;
                 case 3:
                     Selection1Image.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(colors[0])), Selection1Image.Width, Selection1Image.Height);
@@ -108,7 +109,7 @@ namespace SpenderProject
                 player.RemoveCoins(1, 0, 0, 0, 0, 0);
                 WhiteLabel.Text = player.WhiteCoins.ToString();
                 CountTotalText.Text = player.GetSumOfCoins().ToString();
-                colors.Add(Models.Colors.White);
+                colors.Add(Colors.White);
                 reloadCoins();
 
             }
@@ -121,7 +122,7 @@ namespace SpenderProject
                 player.RemoveCoins(0, 0, 0, 1, 0, 0);
                 BlueLabel.Text = player.BlueCoins.ToString();
                 CountTotalText.Text = player.GetSumOfCoins().ToString();
-                colors.Add(Models.Colors.Blue);
+                colors.Add(Colors.Blue);
                 reloadCoins();
 
             }
@@ -134,7 +135,7 @@ namespace SpenderProject
                 player.RemoveCoins(0, 0, 0, 0, 1, 0);
                 GreenLabel.Text = player.GreenCoins.ToString();
                 CountTotalText.Text = player.GetSumOfCoins().ToString();
-                colors.Add(Models.Colors.Green);
+                colors.Add(Colors.Green);
                 reloadCoins();
 
             }
@@ -147,7 +148,7 @@ namespace SpenderProject
                 player.RemoveCoins(0, 0, 1, 0, 0, 0);
                 RedLabel.Text = player.RedCoins.ToString();
                 CountTotalText.Text = player.GetSumOfCoins().ToString();
-                colors.Add(Models.Colors.Red);
+                colors.Add(Colors.Red);
                 reloadCoins();
 
             }
@@ -160,7 +161,7 @@ namespace SpenderProject
                 player.RemoveCoins(0, 1, 0, 0, 0, 0);
                 RedLabel.Text = player.BlackCoins.ToString();
                 CountTotalText.Text = player.GetSumOfCoins().ToString();
-                colors.Add(Models.Colors.Black);
+                colors.Add(Colors.Black);
                 reloadCoins();
 
             }

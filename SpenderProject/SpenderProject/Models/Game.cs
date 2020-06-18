@@ -23,7 +23,7 @@ namespace SpenderProject.Models
             this.gameTitle = gameTitle;
             this.players = new List<Player>();
 
-            board = new Board(numberOfPlayers);
+            this.board = new Board(numberOfPlayers);
 
             for(int i = 0; i < numberOfPlayers; i++)
             {
@@ -34,21 +34,44 @@ namespace SpenderProject.Models
 
         }
 
-
-
         public void endCurrentTurn()
         {
             ActivePlayer = (ActivePlayer + 1) % numberOfPlayers;
         }
 
-        public List<Models.Colors> currentPlayerBuysCard(Card card)
+        public void CheckNobles(Player player)
         {
-            return players[ActivePlayer].BuyCard(card);
+            for (int i = 0; i < board.DisplayNoble.Count; i++)
+            {
+                if (player.isNobleBuyable(board.DisplayNoble[i]))
+                {
+                    players[ActivePlayer].Score += board.DisplayNoble[i].Score;
+                    board.DisplayNoble.RemoveAt(i);
+                }
+            }
+
         }
 
-        public void currentPlayerHoldsCard(Card card)
+        public void currentPlayerBuysCard(Card card, bool held)
         {
-            players[ActivePlayer].holdCard(card);
+            foreach(Colors color in players[ActivePlayer].BuyCard(card, held))
+            {
+                board.addCoin(color);
+            }
+        }
+
+        public bool currentPlayerHoldsCard(Card card)
+        {
+            if (players[ActivePlayer].holdCard(card))
+            {
+                if(board.WildCoins > 0)
+                {
+                    board.WildCoins--;
+                    currentPlayerAddWildCoin();
+                }
+                return true;
+            }
+            return false;
         }
 
         public bool checkBuy(Card card)
@@ -100,6 +123,44 @@ namespace SpenderProject.Models
 
         }
 
+        internal void updatePlayerStatus(Game game)
+        {
+            this.players = game.players;
+            this.board.BlackCoins = game.board.BlackCoins;
+            this.board.BlueCoins = game.board.BlueCoins;
+            this.board.RedCoins = game.board.RedCoins;
+            this.board.GreenCoins = game.board.GreenCoins;
+            this.board.WildCoins = game.board.WildCoins;
+            this.board.WhiteCoins = game.board.WhiteCoins;
+        }
+
+        internal void updateShop(Game game)
+        {
+            this.players = game.players;
+            this.board = game.board;
+        }
+
+        internal void UpdateCoins(Game game)
+        {
+            this.players = game.players;
+            this.board.BlackCoins = game.board.BlackCoins;
+            this.board.BlueCoins = game.board.BlueCoins;
+            this.board.RedCoins = game.board.RedCoins;
+            this.board.GreenCoins = game.board.GreenCoins;
+            this.board.WhiteCoins = game.board.WhiteCoins;
+        }
+
+        internal void UpdateCoinRemover(Game game)
+        {
+            this.players = game.players;
+            this.board.BlackCoins = game.board.BlackCoins;
+            this.board.BlueCoins = game.board.BlueCoins;
+            this.board.RedCoins = game.board.RedCoins;
+            this.board.GreenCoins = game.board.GreenCoins;
+            this.board.WildCoins = game.board.WildCoins;
+            this.board.WhiteCoins = game.board.WhiteCoins;
+        }
+
 
 
         internal int GameIsDone()
@@ -146,5 +207,16 @@ namespace SpenderProject.Models
         {
             return players[ActivePlayer].CheckCoinCount();
         }
+
+        public void removeExcessCoins(List<Colors> colors)
+        {
+            players[ActivePlayer].RemoveCoins(colors);
+
+            foreach(Colors color in colors){
+                board.addCoin(color);
+            }
+
+        }
+
     }
 }

@@ -14,7 +14,7 @@ namespace SpenderProject
 {
     public partial class PlayerStatus : UserControl
     {
-        Models.Game game;
+        Game game { get; set; }
         bool firstTime = true;
         bool showHide = false;
 
@@ -84,26 +84,15 @@ namespace SpenderProject
 
         }
 
-        internal void CheckPlayerCoinCount()
+        public void LoadCoinRemover(int index)
         {
-            if (!game.players[game.ActivePlayer].CheckCoinCount())
-            {
-                parent.lockUI();
-                if(game.ActivePlayer == 2 || game.ActivePlayer == 0)
-                {
-                    coinRemover1.loadPlayer(game.players[game.ActivePlayer], false);
-                }
-                else
-                {
-                    coinRemover2.loadPlayer(game.players[game.ActivePlayer], false);
-                }
-
-                parent.unlockUI();
-
-            }
+            if(index == 0)
+                coinRemover1.loadPlayer(game.players[game.ActivePlayer], false);
+            else
+                coinRemover2.loadPlayer(game.players[game.ActivePlayer], false);
         }
 
-        public void loadGame(Models.Game game)
+        public void loadGame(Game game)
         {
             this.parent = (this.Parent as Base);
             this.game = game;
@@ -114,51 +103,51 @@ namespace SpenderProject
             {
                 case 0:
                     //Player 1 is active
-                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Red)), Player1Turn.Width, Player1Turn.Height);
-                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player2Turn.Width, Player2Turn.Height);
+                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Colors.Red)), Player1Turn.Width, Player1Turn.Height);
+                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player2Turn.Width, Player2Turn.Height);
                     
                     if(game.numberOfPlayers > 2)
                     {
-                        Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player3Turn.Width, Player3Turn.Height);
+                        Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player3Turn.Width, Player3Turn.Height);
                         if(game.numberOfPlayers > 3)
                         {
-                            Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player4Turn.Width, Player4Turn.Height);
+                            Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player4Turn.Width, Player4Turn.Height);
                         }
                     }
 
                     break;
                 case 1:
                     //Player2 is active
-                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player1Turn.Width, Player1Turn.Height);
-                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Blue)), Player2Turn.Width, Player2Turn.Height);
+                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player1Turn.Width, Player1Turn.Height);
+                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Colors.Blue)), Player2Turn.Width, Player2Turn.Height);
 
                     if (game.numberOfPlayers > 2)
                     {
-                        Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player3Turn.Width, Player3Turn.Height);
+                        Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player3Turn.Width, Player3Turn.Height);
                         if (game.numberOfPlayers > 3)
                         {
-                            Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player4Turn.Width, Player4Turn.Height);
+                            Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player4Turn.Width, Player4Turn.Height);
                         }
                     }
                     break;
                 case 2:
                     //Player3 is active
-                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player1Turn.Width, Player1Turn.Height);
-                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player2Turn.Width, Player2Turn.Height);
-                    Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Wild)), Player3Turn.Width, Player3Turn.Height);
+                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player1Turn.Width, Player1Turn.Height);
+                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player2Turn.Width, Player2Turn.Height);
+                    Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Colors.Wild)), Player3Turn.Width, Player3Turn.Height);
                     if (game.numberOfPlayers > 3)
                         {
-                            Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player4Turn.Width, Player4Turn.Height);
+                            Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player4Turn.Width, Player4Turn.Height);
                         }
                     
                     break;
                 case 3:
                     //Player4 is active
 
-                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player1Turn.Width, Player1Turn.Height);
-                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player2Turn.Width, Player2Turn.Height);
-                    Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank)), Player3Turn.Width, Player3Turn.Height);
-                    Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Wild)), Player4Turn.Width, Player4Turn.Height);
+                    Player1Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player1Turn.Width, Player1Turn.Height);
+                    Player2Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player2Turn.Width, Player2Turn.Height);
+                    Player3Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank)), Player3Turn.Width, Player3Turn.Height);
+                    Player4Turn.Image = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getReqCircle(Colors.Wild)), Player4Turn.Width, Player4Turn.Height);
                     break;
 
             }
@@ -193,29 +182,29 @@ namespace SpenderProject
 
             if (firstTime)
             {
-                Player1BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Black));
-                Player1BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Black));
-                Player1WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.White));
-                Player1WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.White));
-                Player1BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Blue));
-                Player1BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Blue));
-                Player1RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Red));
-                Player1RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Red));
-                Player1GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Green));
-                Player1GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Green));
-                Player1WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Wild));
+                Player1BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Black));
+                Player1BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Black));
+                Player1WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.White));
+                Player1WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.White));
+                Player1BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Blue));
+                Player1BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Blue));
+                Player1RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Red));
+                Player1RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Red));
+                Player1GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Green));
+                Player1GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Green));
+                Player1WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Wild));
 
-                Player2BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Black));
-                Player2BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Black));
-                Player2WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.White));
-                Player2WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.White));
-                Player2BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Blue));
-                Player2BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Blue));
-                Player2RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Red));
-                Player2RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Red));
-                Player2GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Green));
-                Player2GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Green));
-                Player2WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Wild));
+                Player2BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Black));
+                Player2BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Black));
+                Player2WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.White));
+                Player2WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.White));
+                Player2BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Blue));
+                Player2BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Blue));
+                Player2RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Red));
+                Player2RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Red));
+                Player2GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Green));
+                Player2GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Green));
+                Player2WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Wild));
             }
 
 
@@ -237,17 +226,17 @@ namespace SpenderProject
 
                 if (firstTime)
                 {
-                    Player3BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Black));
-                    Player3BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Black));
-                    Player3WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.White));
-                    Player3WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.White));
-                    Player3BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Blue));
-                    Player3BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Blue));
-                    Player3RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Red));
-                    Player3RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Red));
-                    Player3GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Green));
-                    Player3GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Green));
-                    Player3WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Wild));
+                    Player3BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Black));
+                    Player3BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Black));
+                    Player3WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.White));
+                    Player3WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.White));
+                    Player3BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Blue));
+                    Player3BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Blue));
+                    Player3RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Red));
+                    Player3RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Red));
+                    Player3GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Green));
+                    Player3GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Green));
+                    Player3WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Wild));
                 }
                
 
@@ -268,17 +257,17 @@ namespace SpenderProject
 
                     if (firstTime)
                     {
-                        Player4BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Black));
-                        Player4BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Black));
-                        Player4WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.White));
-                        Player4WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.White));
-                        Player4BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Blue));
-                        Player4BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Blue));
-                        Player4RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Red));
-                        Player4RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Red));
-                        Player4GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Models.Colors.Green));
-                        Player4GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Green));
-                        Player4WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Models.Colors.Wild));
+                        Player4BlackCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Black));
+                        Player4BlackCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Black));
+                        Player4WhiteCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.White));
+                        Player4WhiteCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.White));
+                        Player4BlueCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Blue));
+                        Player4BlueCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Blue));
+                        Player4RedCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Red));
+                        Player4RedCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Red));
+                        Player4GreenCard.Image = new Bitmap(DirectorySelector.getReqRectangle(Colors.Green));
+                        Player4GreenCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Green));
+                        Player4WildCoins.Image = new Bitmap(DirectorySelector.getReqCircle(Colors.Wild));
                     }
                     
                 }
@@ -290,9 +279,16 @@ namespace SpenderProject
 
         }
 
+        internal void buyCard(Models.Card card)
+        {
+            game.currentPlayerBuysCard(card, true);
+            this.parent.UpdatePlayerStatus(game);
+        }
+
         internal void removeExcessCoins(List<Colors> colors)
         {
-            this.parent.removeExcessCoins(colors);
+            game.removeExcessCoins(colors);
+            this.parent.UpdateCoinRemover(game);
         }
 
         public void resetHeldCards()
@@ -398,7 +394,7 @@ namespace SpenderProject
             buySet(card, game.players[game.ActivePlayer].IsCardBuyable(card));
         }
 
-        public void buySet(Models.Card card, bool buy)
+        public void buySet(Card card, bool buy)
         {
             if (card.Equals(card1.card))
             {

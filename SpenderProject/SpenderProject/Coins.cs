@@ -17,8 +17,8 @@ namespace SpenderProject.Resources.Images
     {
 
         public Base parent;
-        public List<Models.Colors> selectedCoins { get; set; }
-        public Board board { get; set; }
+        public List<Colors> selectedCoins { get; set; }
+        public Game game { get; set; }
         public Board coinSelectionBoard { get; set; }
         public bool firstTime { get; set; } = true;
 
@@ -38,9 +38,11 @@ namespace SpenderProject.Resources.Images
 
         }
 
-        public void LoadBoard(Models.Board board)
+        public void LoadGame(Game game)
         {
-            
+            this.game = game;
+            Board board = game.board;
+
             WildLabel.Text = "x " + board.WildCoins.ToString();
             WhiteLabel.Text = "x " + board.WhiteCoins.ToString();
             BlueLabel.Text = "x " + board.BlueCoins.ToString();
@@ -56,14 +58,14 @@ namespace SpenderProject.Resources.Images
 
                 this.parent = (this.Parent as Base);
 
-                selectedCoins = new List<Models.Colors>();
+                selectedCoins = new List<Colors>();
 
-                this.board = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
+                this.game.board = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
                 this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
 
-                CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
-                CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
-                CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
+                CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
+                CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
+                CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
 
                 WildCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.Wild)), WildCoin.Width, WildCoin.Height);
                 WhiteCoin.Image = ImageResizer.ResizeImage((Image)new Bitmap(DirectorySelector.getChipDirectory(Colors.White)), WhiteCoin.Width, WhiteCoin.Height);
@@ -74,27 +76,16 @@ namespace SpenderProject.Resources.Images
             }
 
         }
-
-        internal void addCoins(List<Colors> colors)
+        private void Load(Board board)
         {
-            foreach(Models.Colors color in colors)
-            {
-                addCoin(color);
-            }
-        }
 
-        internal void removeCoin(Models.Colors color)
-        {
-            board.removeCoin(color);
-            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
-            LoadBoard(board);
-        }
+            WildLabel.Text = "x " + board.WildCoins.ToString();
+            WhiteLabel.Text = "x " + board.WhiteCoins.ToString();
+            BlueLabel.Text = "x " + board.BlueCoins.ToString();
+            GreenLabel.Text = "x " + board.GreenCoins.ToString();
+            RedLabel.Text = "x " + board.RedCoins.ToString();
+            BlackLabel.Text = "x " + board.BlackCoins.ToString();
 
-        internal void addCoin(Models.Colors color)
-        {
-            board.addCoin(color);
-            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
-            LoadBoard(board);
         }
 
         private void resetSelection()
@@ -102,19 +93,19 @@ namespace SpenderProject.Resources.Images
             switch (selectedCoins.Count)
             {
                 case 0:
-                    CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
-                    CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
-                    CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
+                    CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
+                    CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
+                    CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
                     break;
                 case 1:
                     CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(selectedCoins[0]));
-                    CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
-                    CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
+                    CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
+                    CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
                     break;
                 case 2:
                     CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(selectedCoins[0]));
                     CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(selectedCoins[1]));
-                    CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Models.Colors.Blank));
+                    CoinSelection3.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
                     break;
                 case 3:
                     CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(selectedCoins[0]));
@@ -144,7 +135,7 @@ namespace SpenderProject.Resources.Images
                     if(selectedCoins.Count == 1 && selectedCoins[0] == Colors.White && coinSelectionBoard.WhiteCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.White);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
                         selectedCoins.Add(Colors.White);
                         CancelConfirmVisibility(true);
                     }
@@ -155,7 +146,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.White);
                         coinSelectionBoard.removeCoin(Colors.White);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
 
                         if(selectedCoins.Count == 3)
                         {
@@ -190,7 +181,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Blue && coinSelectionBoard.BlueCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Blue);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
                         selectedCoins.Add(Colors.Blue);
                         CancelConfirmVisibility(true);
                     }
@@ -201,7 +192,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Blue);
                         coinSelectionBoard.removeCoin(Colors.Blue);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -235,7 +226,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Green && coinSelectionBoard.GreenCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Green);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
                         selectedCoins.Add(Colors.Green);
                         CancelConfirmVisibility(true);
                     }
@@ -246,7 +237,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Green);
                         coinSelectionBoard.removeCoin(Colors.Green);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -278,7 +269,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Red && coinSelectionBoard.RedCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Red);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
                         selectedCoins.Add(Colors.Red);
                         CancelConfirmVisibility(true);
                     }
@@ -289,7 +280,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Red);
                         coinSelectionBoard.removeCoin(Colors.Red);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -322,7 +313,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Black && coinSelectionBoard.BlackCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Black);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
                         selectedCoins.Add(Colors.Black);
                         CancelConfirmVisibility(true);
                     }
@@ -333,7 +324,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Black);
                         coinSelectionBoard.removeCoin(Colors.Black);
-                        LoadBoard(coinSelectionBoard);
+                        Load(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -356,7 +347,7 @@ namespace SpenderProject.Resources.Images
 
                 CancelConfirmVisibility(false);
 
-                LoadBoard(coinSelectionBoard);
+                Load(coinSelectionBoard);
 
             }
         }
@@ -378,7 +369,7 @@ namespace SpenderProject.Resources.Images
                     CancelConfirmVisibility(false);
                 }
 
-                LoadBoard(coinSelectionBoard);
+                Load(coinSelectionBoard);
 
             }
         }
@@ -400,7 +391,7 @@ namespace SpenderProject.Resources.Images
                     CancelConfirmVisibility(false);
                 }
 
-                LoadBoard(coinSelectionBoard);
+                Load(coinSelectionBoard);
             }
         }
 
@@ -409,25 +400,25 @@ namespace SpenderProject.Resources.Images
             selectedCoins.Clear();
             resetSelection();
 
-            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
-            LoadBoard(coinSelectionBoard);
+            this.coinSelectionBoard = new Board(this.game.board.WhiteCoins, this.game.board.BlueCoins, this.game.board.RedCoins, this.game.board.BlackCoins, this.game.board.GreenCoins, this.game.board.WildCoins);
+            Load(coinSelectionBoard);
 
             CancelConfirmVisibility(false);
-
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            parent.giveCoinsToActivePlayer(selectedCoins);
+            game.giveCoinsToActivePlayer(selectedCoins);
 
             selectedCoins.Clear();
             resetSelection();
 
-            board.setCoins(coinSelectionBoard.WhiteCoins, coinSelectionBoard.BlueCoins, coinSelectionBoard.RedCoins, 
+            this.game.board.setCoins(coinSelectionBoard.WhiteCoins, coinSelectionBoard.BlueCoins, coinSelectionBoard.RedCoins, 
                 coinSelectionBoard.BlackCoins, coinSelectionBoard.GreenCoins, coinSelectionBoard.WildCoins);
 
             CancelConfirmVisibility(false);
 
+            parent.UpdateCoins(this.game);
             parent.endActivePlayerTurn();
         }
 

@@ -16,113 +16,116 @@ namespace SpenderProject
     public partial class Base : Form
     {
 
-        public Game game;
+        public Game game { get; set; }
 
         public Base()
         {
             InitializeComponent();
 
-            startGame("New Game", 2);
-
             this.BackgroundImage = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getBackground()), this.Width, this.Height);
             this.EndGameLabel.Visible = false;
+
+            startGame("New Game", 2);
         }
 
         public void startGame(string gameTitle, int numberOfPlayers)
         {
-            game = new Game(gameTitle, numberOfPlayers);
-            coins1.LoadBoard(game.board);
-            shop1.loadBoard(game.board, numberOfPlayers);
-            playerStatus1.loadGame(game);
-        }
-
-        internal void CheckPlayerBuyHold(Models.Card card)
-        {
-            Console.WriteLine("BASE");
-            
-            bool isBuyable = game.checkBuy(card);
-            bool isHoldable = game.checkHold(card);
-
-            shop1.buyHoldSet(card, isBuyable, isHoldable);
-
-        }
-
-        internal void buyCard(Models.Card card)
-        {
-
-            coins1.addCoins(game.currentPlayerBuysCard(card));
-            
-            playerStatus1.loadGame(game);
-        }
-
-        internal void HoldCard(Models.Card card)
-        {
-            game.currentPlayerHoldsCard(card);
-            playerStatus1.loadGame(game);
-
-            if (coins1.board.WildCoins > 0)
-            {
-                coins1.removeCoin(Models.Colors.Wild);
-            }
-        }
-
-        internal bool CheckPlayerCoins()
-        {
-            return game.checkActivePlayerCoins();
-        }
-
-        internal void giveCoinsToActivePlayer(List<Colors> coins)
-        {
-            game.giveCoinsToActivePlayer(coins);
-            playerStatus1.loadGame(game);
+            Game newGame = new Game(gameTitle, numberOfPlayers);
+            this.game = newGame;
+            UpdateComponents(newGame);
         }
 
         internal void endActivePlayerTurn()
         {
-            playerStatus1.CheckPlayerCoinCount();
+            CheckPlayerCoinCount(); //CHECK IF PLAYER HAD TOO MANY COINS
 
-            int nobleIndex = shop1.CheckNobles(game.players[game.ActivePlayer]);
-            if (nobleIndex != -1) //ADD NOBLES CHECK!
-            {
-                game.players[game.ActivePlayer].Score += shop1.board.DeckNoble[nobleIndex].Score;
-                shop1.removeNoble(nobleIndex);
-            }
+            this.game.CheckNobles(this.game.players[this.game.ActivePlayer]); //CHECK NOBLES
 
-            int gameWinner = game.GameIsDone();
+            int gameWinner = game.GameIsDone(); //CHECK IF GAME DONE
 
-            if (gameWinner == -1)
-            {
-                game.endCurrentTurn();
-                playerStatus1.hideHelds();
-                playerStatus1.loadGame(game);
-            }
-            else
+            if (gameWinner != -1) //THERE IS A WINNER
             {
                 coins1.Visible = false;
                 shop1.Visible = false;
                 EndGameLabel.Text = "PLAYER " + gameWinner + " WINS!!!";
                 EndGameLabel.Visible = true;
                 Console.WriteLine("GAME IS OVER!");
+                
+            }
+            else //THERE IS NO WINNER
+            {
+                this.game.endCurrentTurn(); //MAKE THE GAME UPDATE THE TURN
+                playerStatus1.hideHelds(); //HIDE CURRENT PLAYER HELD CARDS
+                UpdateComponents(this.game); //UPDATE ALL THE COMPONENTS
             }
             
         }
 
-        internal void removeExcessCoins(List<Colors> colors)
+        private void CheckPlayerCoinCount()
         {
-            game.players[game.ActivePlayer].RemoveCoins(colors);
-            playerStatus1.loadGame(game);
+            if (!this.game.checkActivePlayerCoins())
+            {
+
+                lockUI();
+
+                if (this.game.ActivePlayer == 2 || this.game.ActivePlayer == 0)
+                {
+                    playerStatus1.LoadCoinRemover(0);
+                }
+                else
+                {
+                    playerStatus1.LoadCoinRemover(1);
+                }
+
+                unlockUI();
+
+            }
         }
 
-        internal void lockUI()
+        private void lockUI()
         {
             coins1.Enabled = false;
             shop1.Enabled = false;
+            playerStatus1.Enabled = false;
         }
 
-        internal void unlockUI()
+        private void unlockUI()
         {
             coins1.Enabled = true;
             shop1.Enabled = true;
+            playerStatus1.Enabled = true;
         }
+
+        internal void UpdateCoinRemover(Game game)
+        {
+            this.game.UpdateCoinRemover(game);
+            UpdateComponents(this.game);
+        }
+
+        internal void UpdateCoins(Game game)
+        {
+            this.game.UpdateCoins(game);
+            UpdateComponents(this.game);
+        }
+
+        internal void UpdateShop(Game game)
+        {
+            this.game.updateShop(game);
+            UpdateComponents(this.game);
+        }
+
+        internal void UpdatePlayerStatus(Game game)
+        {
+            this.game.updatePlayerStatus(game);
+            UpdateComponents(this.game);
+        }
+
+        public void UpdateComponents(Game game)
+        {
+            coins1.LoadGame(game);
+            shop1.LoadGame(game);
+            playerStatus1.loadGame(game);
+        }
+
     }
 }

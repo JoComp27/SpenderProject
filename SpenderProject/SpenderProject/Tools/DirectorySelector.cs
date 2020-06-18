@@ -38,12 +38,12 @@ namespace SpenderProject.Tools
             return @"..\\..\\Resources\\Images\\Noble" + number + ".jpg";
         }
 
-        public static string getReqCircle(Models.Colors color)
+        public static string getReqCircle(Colors color)
         {
             return @"..\\..\\Resources\\Images\\Req" + Enum.GetName(typeof(Colors), color) + ".jpg";
         }
 
-        public static string getReqRectangle(Models.Colors color)
+        public static string getReqRectangle(Colors color)
         {
             return @"..\\..\\Resources\\Images\\Card" + Enum.GetName(typeof(Colors), color) + ".jpg";
         }

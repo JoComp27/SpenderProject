@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using SpenderProject.Models;
 
 namespace SpenderProject
 {
@@ -15,7 +16,7 @@ namespace SpenderProject
     {
 
         Base parent;
-        public Models.Board board { get; set; }
+        public Game game { get; set; }
         bool firstTime = true;
 
         public Shop()
@@ -23,9 +24,10 @@ namespace SpenderProject
             InitializeComponent();
         }
 
-        public void loadBoard(Models.Board board, int numberOfPlayers)
+        public void LoadGame(Game game)
         {
-            this.board = board;
+            this.game = game;
+            Board board = this.game.board;
 
             if (firstTime)
             {
@@ -37,7 +39,7 @@ namespace SpenderProject
                 deck2.setLevel(2);
                 deck3.setLevel(3);
 
-                if (numberOfPlayers == 2)
+                if (game.numberOfPlayers == 2)
                 {
                     noble3.setNoble(board.DisplayNoble[0]);
                     board.DisplayNoble.RemoveAt(0);
@@ -46,7 +48,7 @@ namespace SpenderProject
                     noble5.setNoble(board.DisplayNoble[0]);
                     board.DisplayNoble.RemoveAt(0);
                 }
-                else if(numberOfPlayers == 3)
+                else if(game.numberOfPlayers == 3)
                 {
                     noble2.setNoble(board.DisplayNoble[0]);
                     board.DisplayNoble.RemoveAt(0);
@@ -57,7 +59,7 @@ namespace SpenderProject
                     noble5.setNoble(board.DisplayNoble[0]);
                     board.DisplayNoble.RemoveAt(0);
                 }
-                else if (numberOfPlayers == 4)
+                else if (game.numberOfPlayers == 4)
                 {
                     noble1.setNoble(board.DisplayNoble[0]);
                     board.DisplayNoble.RemoveAt(0);
@@ -93,27 +95,6 @@ namespace SpenderProject
             deck2.setNumber(board.Deck2.Count);
             deck3.setNumber(board.Deck3.Count);
 
-        }
-
-
-        internal int CheckNobles(Models.Player player)
-        {
-            for (int i = 0; i < board.DisplayNoble.Count; i++)
-            {
-                if (player.isNobleBuyable(board.DisplayNoble[i]))
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-
-        }
-
-        internal void removeNoble(int nobleIndex)
-        {
-            board.DeckNoble.RemoveAt(nobleIndex);
-            loadBoard(board, board.NumberOfPlayers);
         }
 
         public void removeCard(int level, int index)
@@ -261,66 +242,56 @@ namespace SpenderProject
             switch (cardLevel)
             {
                 case 1:
-                    for (i = 0; i < board.Display1.Count; i++)
+                    for (i = 0; i < game.board.Display1.Count; i++)
                     {
-                        if (board.Display1[i].Equals(card))
+                        if (game.board.Display1[i].Equals(card))
                         {
                             break;
                         }
                     }
-                    removeCard(cardLevel, i);
-                    parent.HoldCard(card);  //ADD PLAYER HOLD CARD
-
-                    /*while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
+                    
+                    if (game.currentPlayerHoldsCard(card)) //ADD PLAYER HOLD CARD
                     {
-                        Thread.Sleep(1000);
-                    }*/
-
-                    board.replaceDeck1Card(i);
-                    parent.endActivePlayerTurn();
-                    loadBoard(board, board.NumberOfPlayers);
+                        removeCard(cardLevel, i);
+                        game.board.replaceDeck1Card(i);
+                        parent.UpdateShop(game);
+                        parent.endActivePlayerTurn();
+                    }
+                    
                     break;
 
                 case 2:
-                    for (i = 0; i < board.Display2.Count; i++)
+                    for (i = 0; i < game.board.Display2.Count; i++)
                     {
-                        if (board.Display2[i].Equals(card))
+                        if (game.board.Display2[i].Equals(card))
                         {
                             break;
                         }
                     }
-                    removeCard(cardLevel, i);
-                    parent.HoldCard(card);//ADD PLAYER HOLD CARD
-
-                    /*while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
+                    if (game.currentPlayerHoldsCard(card)) //ADD PLAYER HOLD CARD
                     {
-                        Thread.Sleep(1000);
-                    }*/
-
-                    board.replaceDeck2Card(i);
-                    parent.endActivePlayerTurn();
-                    loadBoard(board, board.NumberOfPlayers);
+                        removeCard(cardLevel, i);
+                        game.board.replaceDeck2Card(i);
+                        parent.UpdateShop(game);                        
+                        parent.endActivePlayerTurn();
+                    }
                     break;
 
                 case 3:
-                    for (i = 0; i < board.Display3.Count; i++)
+                    for (i = 0; i < game.board.Display3.Count; i++)
                     {
-                        if (board.Display3[i].Equals(card))
+                        if (game.board.Display3[i].Equals(card))
                         {
                             break;
                         }
                     }
-                    removeCard(cardLevel, i);
-                    parent.HoldCard(card);//ADD PLAYER HOLD CARD
-
-                    /*while (!parent.CheckPlayerCoins()) //CHECK PLAYER COIN COUNT!
+                    if (game.currentPlayerHoldsCard(card)) //ADD PLAYER HOLD CARD
                     {
-                        Thread.Sleep(1000);
-                    }*/
-                    
-                    board.replaceDeck3Card(i);
-                    parent.endActivePlayerTurn();
-                    loadBoard(board, board.NumberOfPlayers);
+                        removeCard(cardLevel, i);
+                        game.board.replaceDeck3Card(i);
+                        parent.UpdateShop(game);
+                        parent.endActivePlayerTurn();
+                    }
                     break;
             }
 
@@ -328,8 +299,10 @@ namespace SpenderProject
 
         internal void CheckBuyHold(Models.Card card)
         {
-            Console.WriteLine("SHOP");
-            parent.CheckPlayerBuyHold(card);
+            bool isBuyable = game.checkBuy(card);
+            bool isHoldable = game.checkHold(card);
+
+            buyHoldSet(card, isBuyable, isHoldable);
         }
 
         public void buyHoldSet(Models.Card card, bool buy, bool hold)
@@ -341,17 +314,10 @@ namespace SpenderProject
             switch (level)
             {
                 case 1:
-                    for(int i = 0; i < board.Display1.Count; i++)
+                    for(int i = 0; i < game.board.Display1.Count; i++)
                     {
 
-                        if(i == 1)
-                        {
-                            Console.WriteLine("Board1_2: " + board.Display1[i].ToString());
-                            Console.WriteLine("EQUALS");
-                            Console.WriteLine("Card: " + card.ToString());
-                        }
-
-                        if (board.Display1[i].Equals(card))
+                        if (game.board.Display1[i].Equals(card))
                         {
                             cardNumber = i;
                         }
@@ -359,9 +325,9 @@ namespace SpenderProject
                     }
                     break;
                 case 2:
-                    for (int i = 0; i < board.Display2.Count; i++)
+                    for (int i = 0; i < game.board.Display2.Count; i++)
                     {
-                        if (board.Display2[i].Equals(card))
+                        if (game.board.Display2[i].Equals(card))
                         {
                             cardNumber = i;
                         }
@@ -369,9 +335,9 @@ namespace SpenderProject
                     }
                     break;
                 case 3:
-                    for (int i = 0; i < board.Display3.Count; i++)
+                    for (int i = 0; i < game.board.Display3.Count; i++)
                     {
-                        if (board.Display3[i].Equals(card))
+                        if (game.board.Display3[i].Equals(card))
                         {
                             cardNumber = i;
                         }
@@ -379,8 +345,6 @@ namespace SpenderProject
                     }
                     break;
             }
-
-            Console.WriteLine("Level: " + level + ", Card Number: " + cardNumber);
 
             switch (level)
             {
@@ -460,45 +424,45 @@ namespace SpenderProject
             switch (cardLevel)
             {
                 case 1:
-                    for(i = 0; i < board.Display1.Count; i++)
+                    for(i = 0; i < game.board.Display1.Count; i++)
                     {
-                        if (board.Display1[i].Equals(card))
+                        if (game.board.Display1[i].Equals(card))
                         {
                             break;
                         }
                     }
-                    board.replaceDeck1Card(i);
-                    parent.buyCard(card); //ADD PLAYER BUY CARD
+                    game.board.replaceDeck1Card(i);
+                    game.currentPlayerBuysCard(card, false);//ADD PLAYER BUY CARD
+                    parent.UpdateShop(game);
                     parent.endActivePlayerTurn();
-                    loadBoard(board, board.NumberOfPlayers);
                     break;
 
                 case 2:
-                    for (i = 0; i < board.Display2.Count; i++)
+                    for (i = 0; i < game.board.Display2.Count; i++)
                     {
-                        if (board.Display2[i].Equals(card))
+                        if (game.board.Display2[i].Equals(card))
                         {
                             break;
                         }
                     }
-                    board.replaceDeck2Card(i);
-                    parent.buyCard(card); //ADD PLAYER BUY CARD
+                    game.board.replaceDeck2Card(i);
+                    game.currentPlayerBuysCard(card, false);//ADD PLAYER BUY CARD
+                    parent.UpdateShop(game); 
                     parent.endActivePlayerTurn();
-                    loadBoard(board, board.NumberOfPlayers);
                     break;
 
                 case 3:
-                    for (i = 0; i < board.Display3.Count; i++)
+                    for (i = 0; i < game.board.Display3.Count; i++)
                     {
-                        if (board.Display3[i].Equals(card))
+                        if (game.board.Display3[i].Equals(card))
                         {
                             break;
                         }
                     }
-                    board.replaceDeck3Card(i);
-                    parent.buyCard(card); //ADD PLAYER BUY CARD
+                    game.board.replaceDeck3Card(i);
+                    game.currentPlayerBuysCard(card, false);//ADD PLAYER BUY CARD
+                    parent.UpdateShop(game);
                     parent.endActivePlayerTurn();
-                    loadBoard(board, board.NumberOfPlayers);
                     break;
             }
         }

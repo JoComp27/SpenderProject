@@ -263,7 +263,6 @@ namespace SpenderProject
 
         public void enableBuyButton(bool value)
         {
-            Console.WriteLine("CARD");
             buyButton.Enabled = value;
         }
 
@@ -280,12 +279,23 @@ namespace SpenderProject
 
         private void buyButton_Click(object sender, EventArgs e)
         {
-            parentForm.buyClicked(card);
+            if (ShopCard)
+            {
+                parentForm.buyClicked(card);
+            }
+            else
+            {
+                playerStatusParent.buyCard(card);
+            }
+
         }
 
         private void holdButton_Click(object sender, EventArgs e)
         {
-            parentForm.holdClicked(card);
+            if (ShopCard)
+            {
+                parentForm.holdClicked(card);
+            }
         }
 
         private void backgroundPicture_mouseEntered(object sender, MouseEventArgs e)

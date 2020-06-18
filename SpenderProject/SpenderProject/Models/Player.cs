@@ -54,31 +54,13 @@ namespace SpenderProject.Models
             this.HeldCards = new List<Card>();
         }
 
-        public Player(string playerName, int score, int whiteCoins, int blueCoins, int greenCoins, int redCoins, int blackCoins, int wildCoins, int whiteCards, int blueCards, int greenCards, int redCards, int blackCards, List<Card> heldCards) : this(playerName)
-        {
-            Score = score;
-            WhiteCoins = whiteCoins;
-            BlueCoins = blueCoins;
-            GreenCoins = greenCoins;
-            RedCoins = redCoins;
-            BlackCoins = blackCoins;
-            WildCoins = wildCoins;
-            WhiteCards = whiteCards;
-            BlueCards = blueCards;
-            GreenCards = greenCards;
-            RedCards = redCards;
-            BlackCards = blackCards;
-            HeldCards = heldCards;
-        }
-
-
 
         //Function for when a player attempts to buy a card
-        public List<Models.Colors> BuyCard(Card card)
+        public List<Colors> BuyCard(Card card, bool held)
         {
-            if (IsCardBuyable(card))
+            if (IsCardBuyable(card) && !held || held && IsCardBuyable(card) && checkIfActuallyHeld(card))
             {
-                List<Models.Colors> colors = new List<Models.Colors>();
+                List<Colors> colors = new List<Colors>();
 
                 //Increment Score by card's score
                 Score += card.Points;
@@ -96,7 +78,7 @@ namespace SpenderProject.Models
 
                             for(int i = 0; i < removedAmount; i++)
                             {
-                                colors.Add(Models.Colors.White);
+                                colors.Add(Colors.White);
                             }
 
                         }
@@ -108,12 +90,12 @@ namespace SpenderProject.Models
 
                         for(int i = 0; i < diff; i++)
                         {
-                            colors.Add(Models.Colors.Wild);
+                            colors.Add(Colors.Wild);
                         }
 
                         for(int i = 0; i < WhiteCoins; i++)
                         {
-                            colors.Add(Models.Colors.White);
+                            colors.Add(Colors.White);
                         }
 
                         WhiteCoins = 0;
@@ -132,7 +114,7 @@ namespace SpenderProject.Models
                             BlackCoins -= removedAmount;
                             for (int i = 0; i < removedAmount; i++)
                             {
-                                colors.Add(Models.Colors.Black);
+                                colors.Add(Colors.Black);
                             }
                         }
                     }
@@ -143,12 +125,12 @@ namespace SpenderProject.Models
 
                         for (int i = 0; i < diff; i++)
                         {
-                            colors.Add(Models.Colors.Wild);
+                            colors.Add(Colors.Wild);
                         }
 
                         for (int i = 0; i < WhiteCoins; i++)
                         {
-                            colors.Add(Models.Colors.White);
+                            colors.Add(Colors.White);
                         }
 
                         BlackCoins = 0;
@@ -167,7 +149,7 @@ namespace SpenderProject.Models
                             RedCoins -= removedAmount;
                             for(int i = 0; i < removedAmount; i++)
                             {
-                                colors.Add(Models.Colors.Red);
+                                colors.Add(Colors.Red);
                             }
                         }
                     }
@@ -178,12 +160,12 @@ namespace SpenderProject.Models
 
                         for (int i = 0; i < diff; i++)
                         {
-                            colors.Add(Models.Colors.Wild);
+                            colors.Add(Colors.Wild);
                         }
 
                         for (int i = 0; i < RedCoins; i++)
                         {
-                            colors.Add(Models.Colors.Red);
+                            colors.Add(Colors.Red);
                         }
 
                         RedCoins = 0;
@@ -202,7 +184,7 @@ namespace SpenderProject.Models
                             BlueCoins -= removedAmount;
                             for (int i = 0; i < removedAmount; i++)
                             {
-                                colors.Add(Models.Colors.Blue);
+                                colors.Add(Colors.Blue);
                             }
                         }
                     }
@@ -213,12 +195,12 @@ namespace SpenderProject.Models
 
                         for (int i = 0; i < diff; i++)
                         {
-                            colors.Add(Models.Colors.Wild);
+                            colors.Add(Colors.Wild);
                         }
 
                         for (int i = 0; i < BlueCoins; i++)
                         {
-                            colors.Add(Models.Colors.Blue);
+                            colors.Add(Colors.Blue);
                         }
 
                         BlueCoins = 0;
@@ -236,7 +218,7 @@ namespace SpenderProject.Models
                             GreenCoins -= removedAmount;
                             for (int i = 0; i < removedAmount; i++)
                             {
-                                colors.Add(Models.Colors.Green);
+                                colors.Add(Colors.Green);
                             }
                         }
                     }
@@ -247,12 +229,12 @@ namespace SpenderProject.Models
 
                         for (int i = 0; i < diff; i++)
                         {
-                            colors.Add(Models.Colors.Wild);
+                            colors.Add(Colors.Wild);
                         }
 
                         for (int i = 0; i < GreenCoins; i++)
                         {
-                            colors.Add(Models.Colors.Green);
+                            colors.Add(Colors.Green);
                         }
 
                         GreenCoins = 0;
@@ -288,8 +270,34 @@ namespace SpenderProject.Models
 
                 //ADD VISUAL INDICATOR FOR ILLEGAL BUY
                 Console.WriteLine("PLAYER IS ATTEMPTING TO BUY A CARD, ILLEGAL MOVE");
-                return new List<Models.Colors>();
+                return new List<Colors>();
             }
+        }
+
+        private bool checkIfActuallyHeld(Models.Card card)
+        {
+            int index = -1;
+
+            for (int i = 0; i < HeldCards.Count; i++)
+            {
+                if (card.Equals(HeldCards[i]))
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1)
+            {
+                HeldCards.RemoveAt(index);
+                return true;
+            }
+            else
+            {
+                return false;
+                Console.WriteLine("PLAYER IS ATTEMPTING TO BUY AN UNKNOWN HELD CARD, ILLEGAL MOVE");
+            }
+
         }
 
         internal bool isNobleBuyable(Noble noble)
@@ -307,22 +315,22 @@ namespace SpenderProject.Models
         {
             switch (colors)
             {
-                case Models.Colors.Black:
+                case Colors.Black:
                     BlackCoins++;
                     break;
-                case Models.Colors.Blue:
+                case Colors.Blue:
                     BlueCoins++;
                     break;
-                case Models.Colors.Green:
+                case Colors.Green:
                     GreenCoins++;
                     break;
-                case Models.Colors.Red:
+                case Colors.Red:
                     RedCoins++;
                     break;
-                case Models.Colors.White:
+                case Colors.White:
                     WhiteCoins++;
                     break;
-                case Models.Colors.Wild:
+                case Colors.Wild:
                     WildCoins++;
                     break;
             }
@@ -391,34 +399,19 @@ namespace SpenderProject.Models
             return HeldCards.Count < 3;
         }
 
-        public void holdCard(Card card)
+        public bool holdCard(Card card)
         {
             if(HeldCards.Count < 4)
             {
-                WildCoins++;
                 HeldCards.Add(card);
+                return true;
             }
             else
             {
+                return false;
                 //ADD VISUAL INDICATOR FOR ILLEGAL HOLD
                 Console.WriteLine("PLAYER IS ATTEMPTING TO HOLD A CARD, ILLEGAL MOVE");
             }
-        }
-
-        public void buyHeldCard(int heldCardIndex)
-        {
-            Card temp = HeldCards[heldCardIndex];
-
-            if (IsCardBuyable(temp))
-            {
-                BuyCard(temp);
-                HeldCards.RemoveAt(heldCardIndex);
-            }
-            else
-            {
-                Console.WriteLine("PLAYER IS ATTEMPTING TO BUY A HELD CARD, ILLEGAL MOVE");
-            }
-
         }
 
         public bool CheckCoinCount()
@@ -447,28 +440,28 @@ namespace SpenderProject.Models
             WildCoins -= wild;
         }
 
-        public void RemoveCoins(List<Models.Colors> colors)
+        public void RemoveCoins(List<Colors> colors)
         {
-            foreach(Models.Colors color in colors)
+            foreach(Colors color in colors)
             {
                 switch (color)
                 {
-                    case Models.Colors.Black:
+                    case Colors.Black:
                         BlackCoins--;
                         break;
-                    case Models.Colors.Blue:
+                    case Colors.Blue:
                         BlueCoins--;
                         break;
-                    case Models.Colors.Green:
+                    case Colors.Green:
                         GreenCoins--;
                         break;
-                    case Models.Colors.Red:
+                    case Colors.Red:
                         RedCoins--;
                         break;
-                    case Models.Colors.White:
+                    case Colors.White:
                         WhiteCoins--;
                         break;
-                    case Models.Colors.Wild:
+                    case Colors.Wild:
                         WildCoins--;
                         break;
 

@@ -57,7 +57,7 @@ namespace SpenderProject
             // shop1
             // 
             this.shop1.BackColor = System.Drawing.Color.Transparent;
-            this.shop1.board = null;
+            this.shop1.game = null;
             this.shop1.Location = new System.Drawing.Point(3, 247);
             this.shop1.Name = "shop1";
             this.shop1.Size = new System.Drawing.Size(758, 690);
@@ -66,7 +66,7 @@ namespace SpenderProject
             // coins1
             // 
             this.coins1.BackColor = System.Drawing.Color.Transparent;
-            this.coins1.board = null;
+            this.coins1.game = null;
             this.coins1.coinSelectionBoard = null;
             this.coins1.firstTime = true;
             this.coins1.Location = new System.Drawing.Point(938, 254);
