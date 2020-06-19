@@ -96,27 +96,9 @@ namespace SpenderProject
             playerStatus1.Enabled = true;
         }
 
-        internal void UpdateCoinRemover(Game game)
+        internal void UpdateGame(Game game)
         {
-            this.game.UpdateCoinRemover(game);
-            UpdateComponents(this.game);
-        }
-
-        internal void UpdateCoins(Game game)
-        {
-            this.game.UpdateCoins(game);
-            UpdateComponents(this.game);
-        }
-
-        internal void UpdateShop(Game game)
-        {
-            this.game.updateShop(game);
-            UpdateComponents(this.game);
-        }
-
-        internal void UpdatePlayerStatus(Game game)
-        {
-            this.game.updatePlayerStatus(game);
+            this.game = new Game(game);
             UpdateComponents(this.game);
         }
 

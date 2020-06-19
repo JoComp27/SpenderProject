@@ -282,13 +282,14 @@ namespace SpenderProject
         internal void buyCard(Models.Card card)
         {
             game.currentPlayerBuysCard(card, true);
-            this.parent.UpdatePlayerStatus(game);
+            this.parent.UpdateGame(game);
+            this.parent.endActivePlayerTurn();
         }
 
         internal void removeExcessCoins(List<Colors> colors)
         {
             game.removeExcessCoins(colors);
-            this.parent.UpdateCoinRemover(game);
+            this.parent.UpdateGame(game);
         }
 
         public void resetHeldCards()
@@ -394,7 +395,7 @@ namespace SpenderProject
             buySet(card, game.players[game.ActivePlayer].IsCardBuyable(card));
         }
 
-        public void buySet(Card card, bool buy)
+        public void buySet(Models.Card card, bool buy)
         {
             if (card.Equals(card1.card))
             {

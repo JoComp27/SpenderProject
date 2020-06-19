@@ -34,6 +34,16 @@ namespace SpenderProject.Models
 
         }
 
+        public Game(Game game)
+        {
+            this.gameTitle = game.gameTitle;
+            this.board = new Board(game.board);
+            ActivePlayer = game.ActivePlayer;
+            this.players = game.players;
+            this.numberOfPlayers = game.numberOfPlayers;
+            this.firstWinner = game.firstWinner;
+        }
+
         public void endCurrentTurn()
         {
             ActivePlayer = (ActivePlayer + 1) % numberOfPlayers;
@@ -54,6 +64,9 @@ namespace SpenderProject.Models
 
         public void currentPlayerBuysCard(Card card, bool held)
         {
+            Console.WriteLine(card.ToString());
+            Console.WriteLine(card.Color);
+
             foreach(Colors color in players[ActivePlayer].BuyCard(card, held))
             {
                 board.addCoin(color);
@@ -123,45 +136,6 @@ namespace SpenderProject.Models
 
         }
 
-        internal void updatePlayerStatus(Game game)
-        {
-            this.players = game.players;
-            this.board.BlackCoins = game.board.BlackCoins;
-            this.board.BlueCoins = game.board.BlueCoins;
-            this.board.RedCoins = game.board.RedCoins;
-            this.board.GreenCoins = game.board.GreenCoins;
-            this.board.WildCoins = game.board.WildCoins;
-            this.board.WhiteCoins = game.board.WhiteCoins;
-        }
-
-        internal void updateShop(Game game)
-        {
-            this.players = game.players;
-            this.board = game.board;
-        }
-
-        internal void UpdateCoins(Game game)
-        {
-            this.players = game.players;
-            this.board.BlackCoins = game.board.BlackCoins;
-            this.board.BlueCoins = game.board.BlueCoins;
-            this.board.RedCoins = game.board.RedCoins;
-            this.board.GreenCoins = game.board.GreenCoins;
-            this.board.WhiteCoins = game.board.WhiteCoins;
-        }
-
-        internal void UpdateCoinRemover(Game game)
-        {
-            this.players = game.players;
-            this.board.BlackCoins = game.board.BlackCoins;
-            this.board.BlueCoins = game.board.BlueCoins;
-            this.board.RedCoins = game.board.RedCoins;
-            this.board.GreenCoins = game.board.GreenCoins;
-            this.board.WildCoins = game.board.WildCoins;
-            this.board.WhiteCoins = game.board.WhiteCoins;
-        }
-
-
 
         internal int GameIsDone()
         {
@@ -210,7 +184,7 @@ namespace SpenderProject.Models
 
         public void removeExcessCoins(List<Colors> colors)
         {
-            players[ActivePlayer].RemoveCoins(colors);
+            players[(ActivePlayer-1) % numberOfPlayers].RemoveCoins(colors);
 
             foreach(Colors color in colors){
                 board.addCoin(color);

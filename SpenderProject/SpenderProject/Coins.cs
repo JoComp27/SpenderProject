@@ -50,6 +50,10 @@ namespace SpenderProject.Resources.Images
             RedLabel.Text = "x " + board.RedCoins.ToString();
             BlackLabel.Text = "x " + board.BlackCoins.ToString();
 
+            this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
+            
+            selectedCoins = new List<Colors>();
+            resetSelection();
 
             if (firstTime)
             {
@@ -57,11 +61,6 @@ namespace SpenderProject.Resources.Images
                 firstTime = false;
 
                 this.parent = (this.Parent as Base);
-
-                selectedCoins = new List<Colors>();
-
-                this.game.board = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
-                this.coinSelectionBoard = new Board(board.WhiteCoins, board.BlueCoins, board.RedCoins, board.BlackCoins, board.GreenCoins, board.WildCoins);
 
                 CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
                 CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
@@ -76,7 +75,7 @@ namespace SpenderProject.Resources.Images
             }
 
         }
-        private void Load(Board board)
+        private void LoadGame(Board board)
         {
 
             WildLabel.Text = "x " + board.WildCoins.ToString();
@@ -135,7 +134,7 @@ namespace SpenderProject.Resources.Images
                     if(selectedCoins.Count == 1 && selectedCoins[0] == Colors.White && coinSelectionBoard.WhiteCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.White);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
                         selectedCoins.Add(Colors.White);
                         CancelConfirmVisibility(true);
                     }
@@ -146,7 +145,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.White);
                         coinSelectionBoard.removeCoin(Colors.White);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
 
                         if(selectedCoins.Count == 3)
                         {
@@ -181,7 +180,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Blue && coinSelectionBoard.BlueCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Blue);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
                         selectedCoins.Add(Colors.Blue);
                         CancelConfirmVisibility(true);
                     }
@@ -192,7 +191,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Blue);
                         coinSelectionBoard.removeCoin(Colors.Blue);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -226,7 +225,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Green && coinSelectionBoard.GreenCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Green);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
                         selectedCoins.Add(Colors.Green);
                         CancelConfirmVisibility(true);
                     }
@@ -237,7 +236,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Green);
                         coinSelectionBoard.removeCoin(Colors.Green);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -269,7 +268,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Red && coinSelectionBoard.RedCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Red);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
                         selectedCoins.Add(Colors.Red);
                         CancelConfirmVisibility(true);
                     }
@@ -280,7 +279,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Red);
                         coinSelectionBoard.removeCoin(Colors.Red);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -313,7 +312,7 @@ namespace SpenderProject.Resources.Images
                     if (selectedCoins.Count == 1 && selectedCoins[0] == Colors.Black && coinSelectionBoard.BlackCoins >= 3)
                     {
                         coinSelectionBoard.removeCoin(Colors.Black);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
                         selectedCoins.Add(Colors.Black);
                         CancelConfirmVisibility(true);
                     }
@@ -324,7 +323,7 @@ namespace SpenderProject.Resources.Images
                     {
                         selectedCoins.Add(Colors.Black);
                         coinSelectionBoard.removeCoin(Colors.Black);
-                        Load(coinSelectionBoard);
+                        LoadGame(coinSelectionBoard);
 
                         if (selectedCoins.Count == 3)
                         {
@@ -347,7 +346,7 @@ namespace SpenderProject.Resources.Images
 
                 CancelConfirmVisibility(false);
 
-                Load(coinSelectionBoard);
+                LoadGame(coinSelectionBoard);
 
             }
         }
@@ -369,7 +368,7 @@ namespace SpenderProject.Resources.Images
                     CancelConfirmVisibility(false);
                 }
 
-                Load(coinSelectionBoard);
+                LoadGame(coinSelectionBoard);
 
             }
         }
@@ -391,7 +390,7 @@ namespace SpenderProject.Resources.Images
                     CancelConfirmVisibility(false);
                 }
 
-                Load(coinSelectionBoard);
+                LoadGame(coinSelectionBoard);
             }
         }
 
@@ -401,7 +400,7 @@ namespace SpenderProject.Resources.Images
             resetSelection();
 
             this.coinSelectionBoard = new Board(this.game.board.WhiteCoins, this.game.board.BlueCoins, this.game.board.RedCoins, this.game.board.BlackCoins, this.game.board.GreenCoins, this.game.board.WildCoins);
-            Load(coinSelectionBoard);
+            LoadGame(coinSelectionBoard);
 
             CancelConfirmVisibility(false);
         }
@@ -418,7 +417,7 @@ namespace SpenderProject.Resources.Images
 
             CancelConfirmVisibility(false);
 
-            parent.UpdateCoins(this.game);
+            parent.UpdateGame(this.game);
             parent.endActivePlayerTurn();
         }
 

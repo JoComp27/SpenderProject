@@ -91,6 +91,25 @@ namespace SpenderProject.Models
             WildCoins = wildCoins;
         }
 
+        public Board(Board board)
+        {
+            NumberOfNoblesShown = board.NumberOfNoblesShown;
+            Deck1 = board.Deck1;
+            Deck2 = board.Deck2;
+            Deck3 = board.Deck3;
+            DeckNoble = board.DeckNoble;
+            Display1 = board.Display1;
+            Display2 = board.Display2;
+            Display3 = board.Display3;
+            DisplayNoble = board.DisplayNoble;
+            WhiteCoins = board.WhiteCoins;
+            BlackCoins = board.BlackCoins;
+            BlueCoins = board.BlueCoins;
+            RedCoins = board.RedCoins;
+            GreenCoins = board.GreenCoins;
+            WildCoins = board.WildCoins;
+        }
+
         private void initializeDeck()
         {
             List<List<int>> intDeck = FileReader.ReadFile(DeckAddress);

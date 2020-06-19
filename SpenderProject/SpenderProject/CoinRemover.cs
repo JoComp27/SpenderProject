@@ -54,7 +54,7 @@ namespace SpenderProject
             
             }
 
-            this.player = player;
+            this.player = new Player(player);
 
             this.Visible = true;
             ConfirmButton.Visible = true;

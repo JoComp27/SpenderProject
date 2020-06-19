@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,23 @@ namespace SpenderProject.Models
             this.HeldCards = new List<Card>();
         }
 
+        public Player(Player player)
+        {
+            PlayerName = player.PlayerName;
+            Score = player.Score;
+            WhiteCoins = player.WhiteCoins;
+            BlueCoins = player.BlueCoins;
+            GreenCoins = player.GreenCoins;
+            RedCoins = player.RedCoins;
+            BlackCoins = player.BlackCoins;
+            WildCoins = player.WildCoins;
+            WhiteCards = player.WhiteCards;
+            BlueCards = player.BlueCards;
+            GreenCards = player.GreenCards;
+            RedCards = player.RedCards;
+            BlackCards = player.BlackCards;
+            HeldCards = player.HeldCards;
+        }
 
         //Function for when a player attempts to buy a card
         public List<Colors> BuyCard(Card card, bool held)

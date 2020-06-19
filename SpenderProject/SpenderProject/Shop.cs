@@ -254,7 +254,7 @@ namespace SpenderProject
                     {
                         removeCard(cardLevel, i);
                         game.board.replaceDeck1Card(i);
-                        parent.UpdateShop(game);
+                        parent.UpdateGame(game);
                         parent.endActivePlayerTurn();
                     }
                     
@@ -272,7 +272,7 @@ namespace SpenderProject
                     {
                         removeCard(cardLevel, i);
                         game.board.replaceDeck2Card(i);
-                        parent.UpdateShop(game);                        
+                        parent.UpdateGame(game);                        
                         parent.endActivePlayerTurn();
                     }
                     break;
@@ -289,7 +289,7 @@ namespace SpenderProject
                     {
                         removeCard(cardLevel, i);
                         game.board.replaceDeck3Card(i);
-                        parent.UpdateShop(game);
+                        parent.UpdateGame(game);
                         parent.endActivePlayerTurn();
                     }
                     break;
@@ -433,7 +433,7 @@ namespace SpenderProject
                     }
                     game.board.replaceDeck1Card(i);
                     game.currentPlayerBuysCard(card, false);//ADD PLAYER BUY CARD
-                    parent.UpdateShop(game);
+                    parent.UpdateGame(game);
                     parent.endActivePlayerTurn();
                     break;
 
@@ -447,7 +447,7 @@ namespace SpenderProject
                     }
                     game.board.replaceDeck2Card(i);
                     game.currentPlayerBuysCard(card, false);//ADD PLAYER BUY CARD
-                    parent.UpdateShop(game); 
+                    parent.UpdateGame(game); 
                     parent.endActivePlayerTurn();
                     break;
 
@@ -461,7 +461,7 @@ namespace SpenderProject
                     }
                     game.board.replaceDeck3Card(i);
                     game.currentPlayerBuysCard(card, false);//ADD PLAYER BUY CARD
-                    parent.UpdateShop(game);
+                    parent.UpdateGame(game);
                     parent.endActivePlayerTurn();
                     break;
             }
