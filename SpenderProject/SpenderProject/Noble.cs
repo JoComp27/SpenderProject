@@ -34,48 +34,68 @@ namespace SpenderProject
         {
             this.noble = noble;
 
-            this.BackgroundImage = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getNobleDirectory(noble.PortraitNumber)), this.Width, this.Height);
-
-            List<Colors> cardColors = new List<Colors>();
-
-            Score.Text = (noble.Score).ToString();
-
-            requirementImage1.Visible = false;
-            requirementImage2.Visible = false;
-            requirementImage3.Visible = false;
-
-            if (noble.BlackRequirement > 0)
+            if (this.noble == null)
             {
-                cardColors.Add(Colors.Black);
+                this.Hide();
             }
-
-            if (noble.BlueRequirement > 0)
+            else
             {
-                cardColors.Add(Colors.Blue);
-            }
 
-            if (noble.RedRequirement > 0)
-            {
-                cardColors.Add(Colors.Red);
-            }
+                requirementImage1.Visible = false;
+                requirementImage2.Visible = false;
+                
+                ReqNum1.Visible = false;
+                ReqNum2.Visible = false;
+                
 
-            if (noble.WhiteRequirement > 0)
-            {
-                cardColors.Add(Colors.White);
-            }
+                this.BackgroundImage = ImageResizer.ResizeImage(new Bitmap(DirectorySelector.getNobleDirectory(noble.PortraitNumber)), this.Width, this.Height);
 
-            if (noble.GreenRequirement > 0)
-            {
-                cardColors.Add(Colors.Green);
-            }
+                List<Colors> cardColors = new List<Colors>();
 
-            int markers = 1;
+                Score.Text = (noble.Score).ToString();
 
-            for (int i = 0; i < cardColors.Count; i++)
-            {
-                if (cardColors[i] == Colors.Black)
+                var colors = new Dictionary<Colors, int>();
+
+                if (noble.BlackRequirement > 0)
+                {
+                    colors.Add(Colors.Black, noble.BlackRequirement);
+                }
+
+                if (noble.BlueRequirement > 0)
+                {
+                    colors.Add(Colors.Blue, noble.BlueRequirement);
+                }
+
+                if (noble.RedRequirement > 0)
+                {
+                    colors.Add(Colors.Red, noble.RedRequirement);
+                }
+
+                if (noble.WhiteRequirement > 0)
+                {
+                    colors.Add(Colors.White, noble.WhiteRequirement);
+                }
+
+                if (noble.GreenRequirement > 0)
+                {
+                    colors.Add(Colors.Green, noble.GreenRequirement);
+                }
+
+                if(colors.Count > 2)
                 {
 
+                }
+                else
+                {
+                    ReqNum3.Text = "";
+                    ReqNum3.Visible = false;
+                    requirementImage3.Visible = false;
+                }
+
+                int markers = 1;
+
+                if (colors.ContainsKey(Colors.Black))
+                {
                     string rectangle = DirectorySelector.getReqRectangle(Colors.Black);
                     string cost = noble.BlackRequirement.ToString();
 
@@ -83,18 +103,15 @@ namespace SpenderProject
                     ReqNum1.Text = cost;
 
                     requirementImage1.Visible = true;
+                    ReqNum1.Visible = true;
 
                     markers++;
 
-                    cardColors.RemoveAt(i);
+                    colors.Remove(Colors.Black);
                 }
-            }
 
-            for (int i = 0; i < cardColors.Count; i++)
-            {
-                if (cardColors[i] == Colors.Red)
+                if (colors.ContainsKey(Colors.Red))
                 {
-
                     string rectangle = DirectorySelector.getReqRectangle(Colors.Red);
                     string cost = noble.RedRequirement.ToString();
 
@@ -104,23 +121,22 @@ namespace SpenderProject
                             requirementImage1.Image = (Image)new Bitmap(rectangle);
                             ReqNum1.Text = cost;
                             requirementImage1.Visible = true;
+                            ReqNum1.Visible = true;
                             break;
                         case 2:
                             requirementImage2.Image = (Image)new Bitmap(rectangle);
                             ReqNum2.Text = cost;
                             requirementImage2.Visible = true;
+                            ReqNum2.Visible = true;
                             break;
                     }
 
                     markers++;
 
-                    cardColors.RemoveAt(i);
+                    colors.Remove(Colors.Red);
                 }
-            }
 
-            for (int i = 0; i < cardColors.Count; i++)
-            {
-                if (cardColors[i] == Colors.Green)
+                if(colors.Count != 0 && colors.ContainsKey(Colors.Green))
                 {
                     string rectangle = DirectorySelector.getReqRectangle(Colors.Green);
                     string cost = noble.GreenRequirement.ToString();
@@ -131,28 +147,28 @@ namespace SpenderProject
                             requirementImage1.Image = (Image)new Bitmap(rectangle);
                             ReqNum1.Text = cost;
                             requirementImage1.Visible = true;
+                            ReqNum1.Visible = true;
                             break;
                         case 2:
                             requirementImage2.Image = (Image)new Bitmap(rectangle);
                             ReqNum2.Text = cost;
                             requirementImage2.Visible = true;
+                            ReqNum2.Visible = true;
                             break;
                         case 3:
                             requirementImage3.Image = (Image)new Bitmap(rectangle);
                             ReqNum3.Text = cost;
                             requirementImage3.Visible = true;
+                            ReqNum3.Visible = true;
                             break;
                     }
 
                     markers++;
 
-                    cardColors.RemoveAt(i);
+                    cardColors.Remove(Colors.Green);
                 }
-            }
 
-            for (int i = 0; i < cardColors.Count; i++)
-            {
-                if (cardColors[i] == Colors.Blue)
+                if (colors.Count != 0 && colors.ContainsKey(Colors.Blue))
                 {
                     string rectangle = DirectorySelector.getReqRectangle(Colors.Blue);
                     string cost = noble.BlueRequirement.ToString();
@@ -163,28 +179,29 @@ namespace SpenderProject
                             requirementImage1.Image = (Image)new Bitmap(rectangle);
                             ReqNum1.Text = cost;
                             requirementImage1.Visible = true;
+                            ReqNum1.Visible = true;
                             break;
                         case 2:
                             requirementImage2.Image = (Image)new Bitmap(rectangle);
                             ReqNum2.Text = cost;
                             requirementImage2.Visible = true;
+                            ReqNum2.Visible = true;
                             break;
                         case 3:
                             requirementImage3.Image = (Image)new Bitmap(rectangle);
                             ReqNum3.Text = cost;
                             requirementImage3.Visible = true;
+                            ReqNum3.Visible = true;
                             break;
                     }
 
                     markers++;
 
-                    cardColors.RemoveAt(i);
-                }
-            }
+                    cardColors.Remove(Colors.Blue);
 
-            for (int i = 0; i < cardColors.Count; i++)
-            {
-                if (cardColors[i] == Colors.White)
+                }
+
+                if (colors.Count != 0 && colors.ContainsKey(Colors.White))
                 {
                     string rectangle = DirectorySelector.getReqRectangle(Colors.White);
                     string cost = noble.WhiteRequirement.ToString();
@@ -195,23 +212,27 @@ namespace SpenderProject
                             requirementImage1.Image = (Image)new Bitmap(rectangle);
                             ReqNum1.Text = cost;
                             requirementImage1.Visible = true;
+                            ReqNum1.Visible = true;
                             break;
                         case 2:
                             requirementImage2.Image = (Image)new Bitmap(rectangle);
                             ReqNum2.Text = cost;
                             requirementImage2.Visible = true;
+                            ReqNum2.Visible = true;
                             break;
                         case 3:
                             requirementImage3.Image = (Image)new Bitmap(rectangle);
                             ReqNum3.Text = cost;
                             requirementImage3.Visible = true;
+                            ReqNum3.Visible = true;
                             break;
                     }
 
                     markers++;
 
-                    cardColors.RemoveAt(i);
+                    cardColors.Remove(Colors.White);
                 }
+
             }
 
         }

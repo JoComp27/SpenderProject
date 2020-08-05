@@ -29,6 +29,11 @@ namespace SpenderProject
             this.game = game;
             Board board = this.game.board;
 
+            if (!firstTime)
+            {
+                setNobles();
+            }
+
             if (firstTime)
             {
                 firstTime = false;
@@ -42,35 +47,23 @@ namespace SpenderProject
                 if (game.numberOfPlayers == 2)
                 {
                     noble3.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble4.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble5.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
+                    noble4.setNoble(board.DisplayNoble[1]);
+                    noble5.setNoble(board.DisplayNoble[2]);
                 }
                 else if(game.numberOfPlayers == 3)
                 {
                     noble2.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble3.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble4.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble5.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
+                    noble3.setNoble(board.DisplayNoble[1]);
+                    noble4.setNoble(board.DisplayNoble[2]);
+                    noble5.setNoble(board.DisplayNoble[3]);
                 }
                 else if (game.numberOfPlayers == 4)
                 {
                     noble1.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble2.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble3.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble4.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
-                    noble5.setNoble(board.DisplayNoble[0]);
-                    board.DisplayNoble.RemoveAt(0);
+                    noble2.setNoble(board.DisplayNoble[1]);
+                    noble3.setNoble(board.DisplayNoble[2]);
+                    noble4.setNoble(board.DisplayNoble[3]);
+                    noble5.setNoble(board.DisplayNoble[4]);
                 }
 
                 
@@ -95,6 +88,50 @@ namespace SpenderProject
             deck2.setNumber(board.Deck2.Count);
             deck3.setNumber(board.Deck3.Count);
 
+           
+            
+        }
+
+        public void setNobles()
+        {
+            switch (game.board.DisplayNoble.Count)
+            {
+                case 4:
+                    noble1.setNoble(null);
+                    noble2.setNoble(game.board.DisplayNoble[0]);
+                    noble3.setNoble(game.board.DisplayNoble[1]);
+                    noble4.setNoble(game.board.DisplayNoble[2]);
+                    noble5.setNoble(game.board.DisplayNoble[3]);
+                    break;
+                case 3:
+                    noble1.setNoble(null);
+                    noble2.setNoble(null);
+                    noble3.setNoble(game.board.DisplayNoble[0]);
+                    noble4.setNoble(game.board.DisplayNoble[1]);
+                    noble5.setNoble(game.board.DisplayNoble[2]);
+                    break;
+                case 2:
+                    noble1.setNoble(null);
+                    noble1.setNoble(null);
+                    noble3.setNoble(null);
+                    noble4.setNoble(game.board.DisplayNoble[0]);
+                    noble5.setNoble(game.board.DisplayNoble[1]);
+                    break;
+                case 1:
+                    noble1.setNoble(null);
+                    noble1.setNoble(null);
+                    noble3.setNoble(null);
+                    noble4.setNoble(null);
+                    noble5.setNoble(game.board.DisplayNoble[0]);
+                    break;
+                case 0:
+                    noble1.setNoble(null);
+                    noble1.setNoble(null);
+                    noble3.setNoble(null);
+                    noble4.setNoble(null);
+                    noble5.setNoble(null);
+                    break;
+            }
         }
 
         public void removeCard(int level, int index)

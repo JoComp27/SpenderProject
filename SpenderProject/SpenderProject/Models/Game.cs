@@ -49,7 +49,7 @@ namespace SpenderProject.Models
             ActivePlayer = (ActivePlayer + 1) % numberOfPlayers;
         }
 
-        public void CheckNobles(Player player)
+        public Boolean CheckNobles(Player player)
         {
             for (int i = 0; i < board.DisplayNoble.Count; i++)
             {
@@ -57,8 +57,11 @@ namespace SpenderProject.Models
                 {
                     players[ActivePlayer].Score += board.DisplayNoble[i].Score;
                     board.DisplayNoble.RemoveAt(i);
+                    return true;
                 }
             }
+
+            return false;
 
         }
 

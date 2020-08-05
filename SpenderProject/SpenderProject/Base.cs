@@ -32,6 +32,13 @@ namespace SpenderProject
         {
             Game newGame = new Game(gameTitle, numberOfPlayers);
             this.game = newGame;
+
+            this.game.players[game.ActivePlayer].WhiteCards = 3;
+            this.game.players[game.ActivePlayer].BlueCards = 3;
+            this.game.players[game.ActivePlayer].RedCards = 3;
+            this.game.players[game.ActivePlayer].BlackCards = 3;
+            this.game.players[game.ActivePlayer].GreenCards = 3;
+
             UpdateComponents(newGame);
         }
 
@@ -39,7 +46,7 @@ namespace SpenderProject
         {
             CheckPlayerCoinCount(); //CHECK IF PLAYER HAD TOO MANY COINS
 
-            this.game.CheckNobles(this.game.players[this.game.ActivePlayer]); //CHECK NOBLES
+            this.game.CheckNobles(this.game.players[this.game.ActivePlayer]); //CHECK NOBLES 
 
             int gameWinner = game.GameIsDone(); //CHECK IF GAME DONE
 

@@ -77,116 +77,86 @@ namespace SpenderProject
                 requirementImage3.Visible = false;
                 requirementImage4.Visible = false;
 
-                if (card.BlackCost > 0)
-                {
-                    cardColors.Add(Colors.Black);
-                }
+                var colors = new Dictionary<Colors, int>();
 
-                if (card.BlueCost > 0)
-                {
-                    cardColors.Add(Colors.Blue);
-                }
-
-                if (card.RedCost > 0)
-                {
-                    cardColors.Add(Colors.Red);
-                }
-
-                if (card.WhiteCost > 0)
-                {
-                    cardColors.Add(Colors.White);
-                }
-
-                if (card.GreenCost > 0)
-                {
-                    cardColors.Add(Colors.Green);
-                }
+                if (card.BlackCost > 0) colors.Add(Colors.Black, card.BlackCost);
+                if (card.BlueCost > 0) colors.Add(Colors.Blue, card.BlueCost);
+                if (card.RedCost > 0) colors.Add(Colors.Red, card.RedCost);
+                if (card.WhiteCost > 0) colors.Add(Colors.White, card.WhiteCost);
+                if (card.GreenCost > 0) colors.Add(Colors.Green, card.GreenCost);
 
                 int markers = 1;
 
-                for (int i = 0; i < cardColors.Count; i++)
+                if (colors.ContainsKey(Colors.Black))
                 {
-                    if (cardColors[i] == Colors.Black)
-                    {
+                    string circle = DirectorySelector.getReqCircle(Colors.Black);
+                    string cost = card.BlackCost.ToString();
 
-                        string circle = DirectorySelector.getReqCircle(Colors.Black);
-                        string cost = card.BlackCost.ToString();
+                    requirementImage1.Image = (Image)new Bitmap(circle);
+                    ReqNum1.Text = cost;
 
-                        requirementImage1.Image = (Image)new Bitmap(circle);
-                        ReqNum1.Text = cost;
+                    requirementImage1.Visible = true;
 
-                        requirementImage1.Visible = true;
+                    markers++;
 
-                        markers++;
-
-                        cardColors.RemoveAt(i);
-                    }
+                    colors.Remove(Colors.Black);
                 }
 
-                for (int i = 0; i < cardColors.Count; i++)
+                if (colors.ContainsKey(Colors.Red))
                 {
-                    if (cardColors[i] == Colors.Red)
+                    string circle = DirectorySelector.getReqCircle(Colors.Red);
+                    string cost = card.RedCost.ToString();
+
+                    switch (markers)
                     {
-
-                        string circle = DirectorySelector.getReqCircle(Colors.Red);
-                        string cost = card.RedCost.ToString();
-
-                        switch (markers)
-                        {
-                            case 1:
-                                requirementImage1.Image = (Image)new Bitmap(circle);
-                                ReqNum1.Text = cost;
-                                requirementImage1.Visible = true;
-                                break;
-                            case 2:
-                                requirementImage2.Image = (Image)new Bitmap(circle);
-                                ReqNum2.Text = cost;
-                                requirementImage2.Visible = true;
-                                break;
-                        }
-
-                        markers++;
-
-                        cardColors.RemoveAt(i);
+                        case 1:
+                            requirementImage1.Image = (Image)new Bitmap(circle);
+                            ReqNum1.Text = cost;
+                            requirementImage1.Visible = true;
+                            break;
+                        case 2:
+                            requirementImage2.Image = (Image)new Bitmap(circle);
+                            ReqNum2.Text = cost;
+                            requirementImage2.Visible = true;
+                            break;
                     }
+
+                    markers++;
+
+                    colors.Remove(Colors.Red);
                 }
 
-                for (int i = 0; i < cardColors.Count; i++)
+                if(colors.Count != 0 && colors.ContainsKey(Colors.Green))
                 {
-                    if (cardColors[i] == Colors.Green)
+                    string circle = DirectorySelector.getReqCircle(Colors.Green);
+                    string cost = card.GreenCost.ToString();
+
+                    switch (markers)
                     {
-                        string circle = DirectorySelector.getReqCircle(Colors.Green);
-                        string cost = card.GreenCost.ToString();
-
-                        switch (markers)
-                        {
-                            case 1:
-                                requirementImage1.Image = (Image)new Bitmap(circle);
-                                ReqNum1.Text = cost;
-                                requirementImage1.Visible = true;
-                                break;
-                            case 2:
-                                requirementImage2.Image = (Image)new Bitmap(circle);
-                                ReqNum2.Text = cost;
-                                requirementImage2.Visible = true;
-                                break;
-                            case 3:
-                                requirementImage3.Image = (Image)new Bitmap(circle);
-                                ReqNum3.Text = cost;
-                                requirementImage3.Visible = true;
-                                break;
-                        }
-
-                        markers++;
-
-                        cardColors.RemoveAt(i);
+                        case 1:
+                            requirementImage1.Image = (Image)new Bitmap(circle);
+                            ReqNum1.Text = cost;
+                            requirementImage1.Visible = true;
+                            break;
+                        case 2:
+                            requirementImage2.Image = (Image)new Bitmap(circle);
+                            ReqNum2.Text = cost;
+                            requirementImage2.Visible = true;
+                            break;
+                        case 3:
+                            requirementImage3.Image = (Image)new Bitmap(circle);
+                            ReqNum3.Text = cost;
+                            requirementImage3.Visible = true;
+                            break;
                     }
+
+                    markers++;
+
+                    colors.Remove(Colors.Green);
                 }
 
-                for (int i = 0; i < cardColors.Count; i++)
+                if (colors.Count != 0 && colors.ContainsKey(Colors.Blue))
                 {
-                    if (cardColors[i] == Colors.Blue)
-                    {
                         string circle = DirectorySelector.getReqCircle(Colors.Blue);
                         string cost = card.BlueCost.ToString();
 
@@ -216,48 +186,44 @@ namespace SpenderProject
 
                         markers++;
 
-                        cardColors.RemoveAt(i);
+                        colors.Remove(Colors.Blue);
                     }
-                }
 
-                for (int i = 0; i < cardColors.Count; i++)
+                if(colors.Count != 0 && colors.ContainsKey(Colors.White))
                 {
-                    if (cardColors[i] == Colors.White)
+                    string circle = DirectorySelector.getReqCircle(Colors.White);
+                    string cost = card.WhiteCost.ToString();
+
+                    switch (markers)
                     {
-                        string circle = DirectorySelector.getReqCircle(Colors.White);
-                        string cost = card.WhiteCost.ToString();
-
-                        switch (markers)
-                        {
-                            case 1:
-                                requirementImage1.Image = (Image)new Bitmap(circle);
-                                ReqNum1.Text = cost;
-                                requirementImage1.Visible = true;
-                                break;
-                            case 2:
-                                requirementImage2.Image = (Image)new Bitmap(circle);
-                                ReqNum2.Text = cost;
-                                requirementImage2.Visible = true;
-                                break;
-                            case 3:
-                                requirementImage3.Image = (Image)new Bitmap(circle);
-                                ReqNum3.Text = cost;
-                                requirementImage3.Visible = true;
-                                break;
-                            case 4:
-                                requirementImage4.Image = (Image)new Bitmap(circle);
-                                ReqNum4.Text = cost;
-                                requirementImage4.Visible = true;
-                                break;
-                        }
-
-                        markers++;
-
-                        cardColors.RemoveAt(i);
+                        case 1:
+                            requirementImage1.Image = (Image)new Bitmap(circle);
+                            ReqNum1.Text = cost;
+                            requirementImage1.Visible = true;
+                            break;
+                        case 2:
+                            requirementImage2.Image = (Image)new Bitmap(circle);
+                            ReqNum2.Text = cost;
+                            requirementImage2.Visible = true;
+                            break;
+                        case 3:
+                            requirementImage3.Image = (Image)new Bitmap(circle);
+                            ReqNum3.Text = cost;
+                            requirementImage3.Visible = true;
+                            break;
+                        case 4:
+                            requirementImage4.Image = (Image)new Bitmap(circle);
+                            ReqNum4.Text = cost;
+                            requirementImage4.Visible = true;
+                            break;
                     }
+
+                    markers++;
+
+                    colors.Remove(Colors.White);
                 }
 
-        }
+            }
 
         }
 
