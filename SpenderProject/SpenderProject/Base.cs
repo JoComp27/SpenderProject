@@ -32,13 +32,6 @@ namespace SpenderProject
         {
             Game newGame = new Game(gameTitle, numberOfPlayers);
             this.game = newGame;
-
-            this.game.players[game.ActivePlayer].WhiteCards = 3;
-            this.game.players[game.ActivePlayer].BlueCards = 3;
-            this.game.players[game.ActivePlayer].RedCards = 3;
-            this.game.players[game.ActivePlayer].BlackCards = 3;
-            this.game.players[game.ActivePlayer].GreenCards = 3;
-
             UpdateComponents(newGame);
         }
 

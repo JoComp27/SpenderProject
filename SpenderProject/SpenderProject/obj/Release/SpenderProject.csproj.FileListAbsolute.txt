@@ -1,0 +1,17 @@
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Release\SpenderProject.exe.config
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Release\SpenderProject.exe
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Release\SpenderProject.pdb
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.csprojAssemblyReference.cache
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Card.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.CoinRemover.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Deck.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Base.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Noble.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.PlayerStatus.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Properties.Resources.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Resources.Images.Coins.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.Shop.resources
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.csproj.GenerateResource.cache
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.csproj.CoreCompileInputs.cache
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.exe
+C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Release\SpenderProject.pdb
