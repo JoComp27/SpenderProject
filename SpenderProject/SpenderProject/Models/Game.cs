@@ -187,7 +187,7 @@ namespace SpenderProject.Models
 
         public void removeExcessCoins(List<Colors> colors)
         {
-            players[(ActivePlayer-1) % numberOfPlayers].RemoveCoins(colors);
+            players[ActivePlayer].RemoveCoins(colors);
 
             foreach(Colors color in colors){
                 board.addCoin(color);

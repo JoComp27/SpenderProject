@@ -32,3 +32,20 @@ C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.pdb
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.exe
 C:\Users\GamingPC\Documents\GitHub\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.pdb
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.exe.config
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.exe
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\bin\Debug\SpenderProject.pdb
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.csproj.SuggestedBindingRedirects.cache
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Card.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.CoinRemover.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Deck.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Base.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Noble.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.PlayerStatus.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Properties.Resources.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Resources.Images.Coins.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.Shop.resources
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.csproj.GenerateResource.cache
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.csproj.CoreCompileInputs.cache
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.exe
+C:\Users\jocoo\Personal Workspaces\SpenderProject\SpenderProject\SpenderProject\obj\Debug\SpenderProject.pdb

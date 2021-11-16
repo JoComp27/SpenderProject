@@ -214,6 +214,10 @@ namespace SpenderProject
                 BlackLabel.Text = "";
                 CountTotalText.Text = "";
 
+                colors.Clear();
+
+                reloadCoins();
+
                 ConfirmButton.Visible = false;
             }
         }

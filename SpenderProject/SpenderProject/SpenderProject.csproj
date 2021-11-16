@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SpenderProject</RootNamespace>
     <AssemblyName>SpenderProject</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,28 +47,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs">
+    <Compile Include="VisualElements\Card.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Card.Designer.cs">
+    <Compile Include="VisualElements\Card.Designer.cs">
       <DependentUpon>Card.cs</DependentUpon>
     </Compile>
-    <Compile Include="CoinRemover.cs">
+    <Compile Include="VisualElements\CoinRemover.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CoinRemover.Designer.cs">
+    <Compile Include="VisualElements\CoinRemover.Designer.cs">
       <DependentUpon>CoinRemover.cs</DependentUpon>
     </Compile>
-    <Compile Include="Deck.cs">
+    <Compile Include="VisualElements\Deck.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Deck.Designer.cs">
+    <Compile Include="VisualElements\Deck.Designer.cs">
       <DependentUpon>Deck.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base.cs">
+    <Compile Include="VisualElements\Base.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Base.Designer.cs">
+    <Compile Include="VisualElements\Base.Designer.cs">
       <DependentUpon>Base.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Board.cs" />
@@ -76,51 +77,51 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Noble.cs" />
     <Compile Include="Models\Player.cs" />
-    <Compile Include="Noble.cs">
+    <Compile Include="VisualElements\Noble.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Noble.Designer.cs">
+    <Compile Include="VisualElements\Noble.Designer.cs">
       <DependentUpon>Noble.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayerStatus.cs">
+    <Compile Include="VisualElements\PlayerStatus.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PlayerStatus.Designer.cs">
+    <Compile Include="VisualElements\PlayerStatus.Designer.cs">
       <DependentUpon>PlayerStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Coins.cs">
+    <Compile Include="VisualElements\Coins.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Coins.Designer.cs">
+    <Compile Include="VisualElements\Coins.Designer.cs">
       <DependentUpon>Coins.cs</DependentUpon>
     </Compile>
-    <Compile Include="Shop.cs">
+    <Compile Include="VisualElements\Shop.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Shop.Designer.cs">
+    <Compile Include="VisualElements\Shop.Designer.cs">
       <DependentUpon>Shop.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\DirectorySelector.cs" />
     <Compile Include="Tools\FileReader.cs" />
     <Compile Include="Tools\ImageResizer.cs" />
-    <EmbeddedResource Include="Card.resx">
+    <EmbeddedResource Include="VisualElements\Card.resx">
       <DependentUpon>Card.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CoinRemover.resx">
+    <EmbeddedResource Include="VisualElements\CoinRemover.resx">
       <DependentUpon>CoinRemover.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Deck.resx">
+    <EmbeddedResource Include="VisualElements\Deck.resx">
       <DependentUpon>Deck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Base.resx">
+    <EmbeddedResource Include="VisualElements\Base.resx">
       <DependentUpon>Base.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Noble.resx">
+    <EmbeddedResource Include="VisualElements\Noble.resx">
       <DependentUpon>Noble.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlayerStatus.resx">
+    <EmbeddedResource Include="VisualElements\PlayerStatus.resx">
       <DependentUpon>PlayerStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -133,10 +134,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Coins.resx">
+    <EmbeddedResource Include="VisualElements\Coins.resx">
       <DependentUpon>Coins.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Shop.resx">
+    <EmbeddedResource Include="VisualElements\Shop.resx">
       <DependentUpon>Shop.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

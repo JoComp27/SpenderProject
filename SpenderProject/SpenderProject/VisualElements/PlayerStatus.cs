@@ -86,10 +86,14 @@ namespace SpenderProject
 
         public void LoadCoinRemover(int index)
         {
-            if(index == 0)
+            if (index == 0)
+            {
                 coinRemover1.loadPlayer(game.players[game.ActivePlayer], false);
+            }
             else
+            {
                 coinRemover2.loadPlayer(game.players[game.ActivePlayer], false);
+            }
         }
 
         public void loadGame(Game game)
@@ -290,6 +294,7 @@ namespace SpenderProject
         {
             game.removeExcessCoins(colors);
             this.parent.UpdateGame(game);
+            this.parent.nextPlayer();
         }
 
         public void resetHeldCards()

@@ -37,7 +37,6 @@ namespace SpenderProject
 
         internal void endActivePlayerTurn()
         {
-            CheckPlayerCoinCount(); //CHECK IF PLAYER HAD TOO MANY COINS
 
             this.game.CheckNobles(this.game.players[this.game.ActivePlayer]); //CHECK NOBLES 
 
@@ -54,21 +53,27 @@ namespace SpenderProject
             }
             else //THERE IS NO WINNER
             {
-                this.game.endCurrentTurn(); //MAKE THE GAME UPDATE THE TURN
-                playerStatus1.hideHelds(); //HIDE CURRENT PLAYER HELD CARDS
-                UpdateComponents(this.game); //UPDATE ALL THE COMPONENTS
+                if (CheckPlayerCoinCount()) //CHECK IF PLAYER HAD TOO MANY COINS)
+                nextPlayer();
             }
             
         }
 
-        private void CheckPlayerCoinCount()
+        internal void nextPlayer()
+        {
+            this.game.endCurrentTurn(); //MAKE THE GAME UPDATE THE TURN
+            playerStatus1.hideHelds(); //HIDE CURRENT PLAYER HELD CARDS
+            UpdateComponents(this.game); //UPDATE ALL THE COMPONENTS
+        }
+
+        private Boolean CheckPlayerCoinCount()
         {
             if (!this.game.checkActivePlayerCoins())
             {
 
                 lockUI();
 
-                if (this.game.ActivePlayer == 2 || this.game.ActivePlayer == 0)
+                if (this.game.ActivePlayer % 2 == 0)
                 {
                     playerStatus1.LoadCoinRemover(0);
                 }
@@ -78,7 +83,11 @@ namespace SpenderProject
                 }
 
                 unlockUI();
-
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
