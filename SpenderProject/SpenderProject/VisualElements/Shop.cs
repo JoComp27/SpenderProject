@@ -15,7 +15,7 @@ namespace SpenderProject
     public partial class Shop : UserControl
     {
 
-        Base parent;
+        GameBoard parent;
         public Game game { get; set; }
         bool firstTime = true;
 
@@ -38,7 +38,7 @@ namespace SpenderProject
             {
                 firstTime = false;
 
-                this.parent = this.Parent as Base;
+                this.parent = this.Parent as GameBoard;
 
                 deck1.setLevel(1);
                 deck2.setLevel(2);

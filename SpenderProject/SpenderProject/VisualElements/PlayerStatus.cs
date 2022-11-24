@@ -18,7 +18,7 @@ namespace SpenderProject
         bool firstTime = true;
         bool showHide = false;
 
-        Base parent;
+        GameBoard parent;
 
         public PlayerStatus()
         {
@@ -98,7 +98,7 @@ namespace SpenderProject
 
         public void loadGame(Game game)
         {
-            this.parent = (this.Parent as Base);
+            this.parent = (this.Parent as GameBoard);
             this.game = game;
 
             //Assumption that 2 players is minimum

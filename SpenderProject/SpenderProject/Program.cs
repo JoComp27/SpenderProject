@@ -19,7 +19,7 @@ namespace SpenderProject
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Base());
+            Application.Run(new GameBoard());
 
         }
     }

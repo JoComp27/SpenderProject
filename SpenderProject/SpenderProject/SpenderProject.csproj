@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VisualElements\Base.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualElements\Base.Designer.cs">
+      <DependentUpon>Base.cs</DependentUpon>
+    </Compile>
     <Compile Include="VisualElements\Card.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,11 +71,11 @@
     <Compile Include="VisualElements\Deck.Designer.cs">
       <DependentUpon>Deck.cs</DependentUpon>
     </Compile>
-    <Compile Include="VisualElements\Base.cs">
+    <Compile Include="VisualElements\GameBoard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VisualElements\Base.Designer.cs">
-      <DependentUpon>Base.cs</DependentUpon>
+    <Compile Include="VisualElements\GameBoard.Designer.cs">
+      <DependentUpon>GameBoard.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Card.cs" />
@@ -106,6 +112,9 @@
     <Compile Include="Tools\DirectorySelector.cs" />
     <Compile Include="Tools\FileReader.cs" />
     <Compile Include="Tools\ImageResizer.cs" />
+    <EmbeddedResource Include="VisualElements\Base.resx">
+      <DependentUpon>Base.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VisualElements\Card.resx">
       <DependentUpon>Card.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,8 +124,8 @@
     <EmbeddedResource Include="VisualElements\Deck.resx">
       <DependentUpon>Deck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VisualElements\Base.resx">
-      <DependentUpon>Base.cs</DependentUpon>
+    <EmbeddedResource Include="VisualElements\GameBoard.resx">
+      <DependentUpon>GameBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisualElements\Noble.resx">
       <DependentUpon>Noble.cs</DependentUpon>

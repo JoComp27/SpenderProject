@@ -16,7 +16,7 @@ namespace SpenderProject.Resources.Images
     public partial class Coins : UserControl
     {
 
-        public Base parent;
+        public GameBoard parent;
         public List<Colors> selectedCoins { get; set; }
         public Game game { get; set; }
         public Board coinSelectionBoard { get; set; }
@@ -60,7 +60,7 @@ namespace SpenderProject.Resources.Images
 
                 firstTime = false;
 
-                this.parent = (this.Parent as Base);
+                this.parent = (this.Parent as GameBoard);
 
                 CoinSelection1.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
                 CoinSelection2.Image = new Bitmap(DirectorySelector.getChipDirectory(Colors.Blank));
